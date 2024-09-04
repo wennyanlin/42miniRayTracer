@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/04 15:57:00 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/04 14:22:37 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 
-int main(int argc, char **argv)
+typedef struct s_ambient
 {
-	(void)argc;
-	if (ft_isspace(' '))
-		printf("libftok\n");
-	init(argv[1]);
-	return (0);
-}
+	char	*id;
+	double	ratio;
+	int		rgb[3];
+}	t_ambient;
+
+typedef struct s_data
+{
+	t_ambient	*ambient;
+}	t_data;
+
+#endif

@@ -1,7 +1,7 @@
 NAME		= miniRT
 
 CC			= gcc
-CFLAGS		= -Werror -Wall -Wextra #-g fsanitize=address
+CFLAGS		= -Werror -Wall -Wextra -g -fsanitize=address
 LIB_FLAG	= -L${LIBFT_DIR} -lft
 DEP_FLAG	= -MMD -MP
 INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/
@@ -17,7 +17,7 @@ OBJ_DIR		= obj/
 PARSE_DIR	= parser/
 
 MAIN_FILES	= miniRT
-PARSE_FILES	=
+PARSE_FILES	= init
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))
@@ -30,7 +30,7 @@ SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 all: libft	$(NAME)
 
 libft:	
-		make -C $(LIBFT_DIR)
+		@make -C $(LIBFT_DIR) --silent
 
 $(NAME):	$(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAG) -o $(NAME)

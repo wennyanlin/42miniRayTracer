@@ -6,7 +6,7 @@
 #    By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 16:02:29 by ale-tron          #+#    #+#              #
-#    Updated: 2024/09/02 16:08:39 by cle-tron         ###   ########.fr        #
+#    Updated: 2024/09/04 16:15:44 by cle-tron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ INCLUDES = inc/libft.h inc/get_next_line.h Makefile
 all:	$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDES)
-	@$(AR) $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS) 
 	@echo "$(GREEN)$(NAME) created$(WHITE)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
