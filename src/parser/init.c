@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/04 19:04:21 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/11 19:26:23 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		count_lines(char *file)
 	return (i);
 }
 
-char	**copy_data(char *file)
+char	**copy_elements(char *file)
 {
 	int		fd;
 	int		i;
@@ -71,16 +71,68 @@ char	**copy_data(char *file)
 	return (data);
 }
 
-void	init(char *file)
+int	element_id(char *elem)
 {
-	char **data;
+	if (!ft_strncmp(elem, "A", 2))
+		return (AMBIENT);
+	else if (!ft_strncmp(elem, "C", 2))
+		return (CAMERA);
+	else if (!ft_strncmp(elem, "L", 2))
+		return (LIGHT);
+	else if (!ft_strncmp(elem, "sp", 3))
+		return (SPHERE);
+	else if (!ft_strncmp(elem, "pl", 3))
+		return (PLANE);
+	else if (!ft_strncmp(elem, "cy", 3))
+		return (CYLINDER);
+	else
+		return (-1);
+}
 
-	data = copy_data(file);
+void	init_ambient(char **elem, t_data *data)
+{
+	char	**rgb;
+
+	rgb = ft_split(elem[2], ',');
+	data->amb->id = elem[0];
+	data->amb->ratio = ft_atoi(elem[1]); //ft_atod
 	int i = 0;
-	while(data[i])
+	while (rgb[i])
 	{
-		printf("%s", data[i]);
-		free(data[i++]);
+		data->amb->rgb[i] = ft_atoi(rgb[i]);
+		printf("%d\n", data->amb->rgb[i]);
+		free(rgb[i]);
+		i++;
 	}
-	free(data);
+	free(rgb);
+}
+
+void	init(char *file, t_data *data)
+{
+	char **line;
+	char **elem;
+	char **tmp;
+
+	(void)data;
+	line = copy_elements(file);
+
+	int i = 0;
+	while(line[i])
+	{
+		elem = ft_split(line[i], ' ');
+		tmp = elem;
+		if (element_id(tmp[0]) == AMBIENT)
+			init_ambient(elem, data);
+			//printf("%s", line[i]);
+		while(*tmp)
+		{
+			printf("%s\n", *tmp);
+			free(*tmp);
+			tmp++;
+		}
+		free(elem);
+		free(line[i++]);
+
+	}
+	free(line);
 }
