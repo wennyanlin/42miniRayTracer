@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:36:18 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:48:40 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		count_lines(char *file)
 			free(line);
 			continue;
 		}
-//		printf("%s", line);
 		i++;
 		free(line);
 	}
@@ -89,34 +88,10 @@ int	element_id(char *elem)
 		return (-1);
 }
 
-void	fill_rgb(char *color, int *rgb)
-{
-	char	**rgb_array;
-	int		i;
-
-	rgb_array = ft_split(color, ',');
-	i = 0;
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(rgb_array[i]);
-		free(rgb_array[i++]);
-	}
-	free(rgb_array);
-}
-
-void	init_ambient(char **elem, t_data *data)
-{
-	data->amb = malloc(sizeof(t_amb));
-	data->amb->id = ft_strdup(elem[0]);
-	data->amb->ratio = ft_atod(elem[1]);
-	fill_rgb(elem[2], data->amb->rgb);
-}
-
 void	init(char *file, t_data *data)
 {
 	char **line;
 	char **elem;
-	char **tmp;
 
 	(void)data;
 	line = copy_elements(file);
@@ -124,18 +99,15 @@ void	init(char *file, t_data *data)
 	int i = 0;
 	while(line[i])
 	{
+		printf("%s", line[i]);
 		elem = ft_split(line[i], ' ');
-		tmp = elem;
-		if (element_id(tmp[0]) == AMBIENT)
+		if (element_id(elem[0]) == AMBIENT)
 			init_ambient(elem, data);
-			//printf("%s", line[i]);
-		while(*tmp)
-		{
-			printf("%s\n", *tmp);
-			free(*tmp);
-			tmp++;
-		}
-		free(elem);
+		else if (element_id(elem[0]) == CAMERA)
+			init_camera(elem, data);
+		else if (element_id(elem[0]) == LIGHT)
+			init_light(elem, data);
+		free_array(elem);
 		free(line[i++]);
 
 	}

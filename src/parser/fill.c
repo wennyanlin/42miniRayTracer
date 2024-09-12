@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 17:15:14 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/12 17:03:37 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/12 17:24:04 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	free_data(t_data *data)
+void	fill_rgb(char *color, int *rgb)
 {
-	free(data->amb->id);
-	free(data->amb);
-	free(data->cam->id);
-	free(data->cam);
-	free(data->light->id);
-	free(data->light);
+	char	**rgb_array;
+	int		i;
 
+	rgb_array = ft_split(color, ',');
+	i = 0;
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(rgb_array[i]);
+		free(rgb_array[i++]);
+	}
+	free(rgb_array);
 }
 
-int main(int argc, char **argv)
+void	fill_coordinates(char *coordinates, double *xyz)
 {
-	t_data	data;
-//	data = malloc(sizeof(t_data));
-	(void)argc;
-	//check_errors function if(error) return 0;
-	init(argv[1], &data);
-	print_data(&data);
-	free_data(&data);
-	return (0);
+	char	**xyz_array;
+	int		i;
+
+	xyz_array = ft_split(coordinates, ',');
+	i = 0;
+	while (i < 3)
+	{
+		xyz[i] = ft_atod(xyz_array[i]);
+		free(xyz_array[i++]);
+	}
+	free(xyz_array);
 }
+
