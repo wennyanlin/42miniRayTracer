@@ -6,7 +6,7 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:40:06 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/02/08 18:41:10 by ale-tron         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:19:25 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/get_next_line.h"
@@ -20,13 +20,13 @@ char	*read_line(int fd, char *stash)
 	if (!buf)
 		return (free(stash), NULL);
 	read_bytes = 1;
-	while (read_bytes > 0 && !ft_strchr(stash, '\n'))
+	while (read_bytes > 0 && !ft_strchr_gnl(stash, '\n'))
 	{
 		read_bytes = read(fd, buf, BUFFER_SIZE);
 		if (read_bytes > 0)
 		{
 			buf[read_bytes] = '\0';
-			stash = ft_strjoin(stash, buf);
+			stash = ft_strjoin_gnl(stash, buf);
 			if (!stash)
 				return (free(buf), NULL);
 		}
@@ -46,7 +46,7 @@ char	*extract_line(char *stash)
 		return (NULL);
 	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
-	result = ft_substr(stash, 0, i + 1);
+	result = ft_substr_gnl(stash, 0, i + 1);
 	if (!result)
 		return (NULL);
 	return (result);
@@ -62,7 +62,7 @@ char	*extract_stash(char *stash)
 		return (NULL);
 	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
-	result = ft_substr(stash, i + 1, ft_strlen(stash));
+	result = ft_substr_gnl(stash, i + 1, ft_strlen_gnl(stash));
 	if (!result)
 		return (free(stash), NULL);
 	return (free(stash), result);

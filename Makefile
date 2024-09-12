@@ -17,7 +17,7 @@ OBJ_DIR		= obj/
 PARSE_DIR	= parser/
 
 MAIN_FILES	= miniRT
-PARSE_FILES	= init
+PARSE_FILES	= init parser_utils 
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))

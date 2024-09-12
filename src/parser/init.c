@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/11 19:26:23 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:36:18 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,22 +89,27 @@ int	element_id(char *elem)
 		return (-1);
 }
 
+void	fill_rgb(char *color, int *rgb)
+{
+	char	**rgb_array;
+	int		i;
+
+	rgb_array = ft_split(color, ',');
+	i = 0;
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(rgb_array[i]);
+		free(rgb_array[i++]);
+	}
+	free(rgb_array);
+}
+
 void	init_ambient(char **elem, t_data *data)
 {
-	char	**rgb;
-
-	rgb = ft_split(elem[2], ',');
-	data->amb->id = elem[0];
-	data->amb->ratio = ft_atoi(elem[1]); //ft_atod
-	int i = 0;
-	while (rgb[i])
-	{
-		data->amb->rgb[i] = ft_atoi(rgb[i]);
-		printf("%d\n", data->amb->rgb[i]);
-		free(rgb[i]);
-		i++;
-	}
-	free(rgb);
+	data->amb = malloc(sizeof(t_amb));
+	data->amb->id = ft_strdup(elem[0]);
+	data->amb->ratio = ft_atod(elem[1]);
+	fill_rgb(elem[2], data->amb->rgb);
 }
 
 void	init(char *file, t_data *data)

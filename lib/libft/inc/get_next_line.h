@@ -6,7 +6,7 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:40:41 by ale-tron          #+#    #+#             */
-/*   Updated: 2023/11/30 16:06:17 by ale-tron         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:18:45 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -19,10 +19,10 @@
 # endif
 
 char	*get_next_line(int fd);
-int		ft_strlen(char *str);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
-char	*ft_strdup(char *s1);	
-char	*ft_substr(char *s, unsigned int start, size_t len);
+int		ft_strlen_gnl(char *str);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_strchr_gnl(char *s, int c);
+char	*ft_strdup_gnl(char *s1);	
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 16:02:29 by ale-tron          #+#    #+#              #
-#    Updated: 2024/09/04 16:15:44 by cle-tron         ###   ########.fr        #
+#    Updated: 2024/09/12 16:32:52 by cle-tron         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ IS_FILES	= ft_isalpha ft_isalnum ft_isascii ft_isdigit ft_isprint ft_isspace
 STR_FILES	= ft_strlcpy ft_strlcat ft_strchr ft_strrchr ft_strncmp ft_strdup ft_substr ft_strjoin ft_strtrim ft_split ft_strlen ft_strnstr ft_strmapi ft_striteri
 MEM_FILES	= ft_bzero ft_memset ft_memcpy ft_memmove ft_memchr ft_memcmp ft_calloc
 PUT_FILES	= ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
-TO_FILES	= ft_tolower ft_toupper ft_atoi ft_itoa
+TO_FILES	= ft_tolower ft_toupper ft_atoi ft_itoa ft_atod
 GNL_FILES	= get_next_line get_next_line_utils
 
 SRC_FILES+=$(addprefix $(IS_DIR),$(IS_FILES))
