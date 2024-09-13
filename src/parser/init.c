@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 17:48:40 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/13 17:42:23 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,32 +70,13 @@ char	**copy_elements(char *file)
 	return (data);
 }
 
-int	element_id(char *elem)
-{
-	if (!ft_strncmp(elem, "A", 2))
-		return (AMBIENT);
-	else if (!ft_strncmp(elem, "C", 2))
-		return (CAMERA);
-	else if (!ft_strncmp(elem, "L", 2))
-		return (LIGHT);
-	else if (!ft_strncmp(elem, "sp", 3))
-		return (SPHERE);
-	else if (!ft_strncmp(elem, "pl", 3))
-		return (PLANE);
-	else if (!ft_strncmp(elem, "cy", 3))
-		return (CYLINDER);
-	else
-		return (-1);
-}
-
 void	init(char *file, t_data *data)
 {
-	char **line;
-	char **elem;
+	char	**line;
+	char	**elem;
 
-	(void)data;
+	data->obj = NULL;
 	line = copy_elements(file);
-
 	int i = 0;
 	while(line[i])
 	{
@@ -107,9 +88,10 @@ void	init(char *file, t_data *data)
 			init_camera(elem, data);
 		else if (element_id(elem[0]) == LIGHT)
 			init_light(elem, data);
+		else if (element_id(elem[0]) >= SPHERE)
+			init_objects(elem, &data->obj);
 		free_array(elem);
 		free(line[i++]);
-
 	}
 	free(line);
 }
