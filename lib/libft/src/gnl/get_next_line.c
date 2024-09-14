@@ -6,10 +6,16 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:40:06 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:19:25 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:06:53 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/get_next_line.h"
+
+void	minirt_error(void)
+{
+	perror("error: read function");
+	exit(errno);
+}
 
 char	*read_line(int fd, char *stash)
 {
@@ -30,6 +36,8 @@ char	*read_line(int fd, char *stash)
 			if (!stash)
 				return (free(buf), NULL);
 		}
+		else if (read_bytes == -1)
+			minirt_error();
 	}
 	if (read_bytes == -1)
 		return (free(stash), free(buf), NULL);

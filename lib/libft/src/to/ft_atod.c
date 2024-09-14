@@ -6,12 +6,11 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:31:56 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:35:48 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:07:40 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
-
 
 static int	skip_space_and_sign(char *str, int *sign)
 {

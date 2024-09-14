@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/13 16:10:20 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:30:58 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 typedef struct s_amb
 {
-	char	*id;
+	int		id;
 	double	ratio;
 	int		rgb[3];
 }	t_amb;
 
 typedef struct s_cam
 {
-	char	*id;
+	int		id;
 	double	xyz[3];
 	double	vc[3];
 	int		fov;
@@ -30,27 +30,11 @@ typedef struct s_cam
 
 typedef struct s_light
 {
-	char	*id;
+	int		id;
 	double	xyz[3];
 	double	ratio;
 }	t_light;
-/*
-typedef struct s_sp
-{
-	int		id;
-	double	xyz[3];
-	double	diam;
-	int		rgb[3];
-}	t_sp;
 
-typedef struct s_pl
-{
-	char	*id;
-	double	xyz[3];
-	double	vc[3];
-	int		rgb[3];
-}	t_pl;
-*/
 typedef struct s_obj
 {
 	int				id;

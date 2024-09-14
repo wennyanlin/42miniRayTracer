@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:49:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:51:26 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:30:27 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_array(char **array)
 {
-	char **tmp;
+	char	**tmp;
 
 	tmp = array;
 	while (*array)

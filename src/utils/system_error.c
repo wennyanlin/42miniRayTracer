@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill.c                                             :+:      :+:    :+:   */
+/*   system_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 17:03:37 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:29:55 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/14 15:45:09 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/14 18:31:20 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	fill_rgb(char *color, int *rgb)
+void	system_error_free_data(char *str, t_data *data)
 {
-	char	**rgb_array;
-	int		i;
-
-	rgb_array = ft_split(color, ',');
-	i = 0;
-	while (i < 3)
-	{
-		rgb[i] = ft_atoi(rgb_array[i]);
-		free(rgb_array[i++]);
-	}
-	free(rgb_array);
+	write(2, "error: ", 7);
+	perror(str);
+	if (data)
+		free_data(data);
+	exit(errno);
 }
 
-void	fill_coordinates(char *coordinates, double *xyz)
+void	system_error(char *str)
 {
-	char	**xyz_array;
-	int		i;
-
-	xyz_array = ft_split(coordinates, ',');
-	i = 0;
-	while (i < 3)
-	{
-		xyz[i] = ft_atod(xyz_array[i]);
-		free(xyz_array[i++]);
-	}
-	free(xyz_array);
+	write(2, "error: ", 7);
+	perror(str);
+	exit(errno);
 }

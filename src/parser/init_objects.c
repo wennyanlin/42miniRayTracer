@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:10:18 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/13 18:12:29 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:28:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static void	init_cylinder(char **elem, t_obj *node)
 	fill_rgb(elem[5], node->rgb);
 }
 
-void	init_objects(char **elem, t_obj **obj)
+void	init_objects(char **elem, t_obj **obj, t_data *data)
 {
 	t_obj	*tmp;
 	t_obj	*node;
 
 	node = malloc(sizeof(t_obj));
+	if (!node)
+		system_error_free_data("malloc", data);
 	node->next = NULL;
 	if (element_id(elem[0]) == SPHERE)
 		init_sphere(elem, node);

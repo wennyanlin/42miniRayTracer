@@ -19,7 +19,7 @@ UTILS_DIR	= utils/
 
 MAIN_FILES	= miniRT
 PARSE_FILES	= init fill init_elements parser_utils init_objects
-UTILS_FILES	= print free_utils
+UTILS_FILES	= print free_utils system_error
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))

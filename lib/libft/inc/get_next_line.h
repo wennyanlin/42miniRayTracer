@@ -6,13 +6,15 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:40:41 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:18:45 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:02:55 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
+# include <errno.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

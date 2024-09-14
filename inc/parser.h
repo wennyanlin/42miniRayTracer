@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:51:08 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/13 17:36:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 18:28:48 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_camera(char **elem, t_data *data);
 void	init_light(char **elem, t_data *data);
 
 //INIT_OBJECTS
-void	init_objects(char **elem, t_obj **obj);
+void	init_objects(char **elem, t_obj **obj, t_data *data);
 
 //FILL
 void	fill_rgb(char *color, int *rgb);
