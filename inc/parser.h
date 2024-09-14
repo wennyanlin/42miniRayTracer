@@ -6,12 +6,15 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:51:08 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:28:48 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/14 19:13:38 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+//CHECK_ERRORS
+int		check_errors(int argc, char **argv);
 
 //INIT
 void	init(char *file, t_data *data);
