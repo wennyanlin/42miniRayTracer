@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:10:30 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:49:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		system_error("malloc");
-//	init(argv[1], data);
-//	print_data(data);
-//	free_data(data);
+	init(argv[1], data);
+	print_data(data);
+	free_data(data);
 	return (0);
 }

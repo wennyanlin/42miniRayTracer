@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:33:19 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:22:41 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:48:47 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,24 @@ void	print_invalid_id(char *tmp)
 
 int	check_identifiers(char **line)
 {
-//	int		a;
-//	int		c;
-//	int		l;
-//	int		obj;
+	int		a;
+	int		c;
+	int		l;
+	int		obj;
 	int		i;
-//	char	*tmp;
+	char	*tmp;
 
 	i = 0;
-//	a = 0;
-//	c = 0;
-//	l = 0;
-//	obj = 0;
-	printf("%p\n", line[i]);
+	a = 0;
+	c = 0;
+	l = 0;
+	obj = 0;
+//	printf("%p\n", line[i]);
 	while (line[i])
 	{
-	printf("%s", line[i]);
-	/*	tmp = ft_strtrim(line[i], " ");
-		printf("%s", tmp);
+//	printf("%s", line[i]);
+		tmp = ft_strtrim(line[i], " ");
+//		printf("%s", tmp);
 		if (line_element_id(tmp) == AMBIENT)
 			a++;
 		else if (line_element_id(tmp) == CAMERA)
@@ -72,8 +72,9 @@ int	check_identifiers(char **line)
 		else if (line_element_id(tmp) >= SPHERE)
 			obj++;
 		else if (line_element_id(tmp) == -1)
-			return (print_invalid_id (tmp), 1);*/
+			return (print_invalid_id (tmp), 1);
 		i++;
+		free(tmp);
 	}
 	
 	return (0);

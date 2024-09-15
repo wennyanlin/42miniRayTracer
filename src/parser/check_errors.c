@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:03:26 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:26:13 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:47:59 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,6 @@ int	check_extention(char *arg)
 	return (0);
 }
 
-void	test(char ***line)
-{
-	int i = 0;
-	printf("%p", *line);
-	while ((*line)[i])
-	{
-		printf("%s", (*line)[i]);
-		i++;
-	}
-
-
-}
-
-
 int	check_errors(int argc, char **argv)
 {
 	char	**line;
@@ -60,11 +46,8 @@ int	check_errors(int argc, char **argv)
 	line = copy_elements(argv[1]);
 	if (!line)
 		return (ft_putendl_fd("Error: empty file", 2), 1);
-//	printf("%p\n", line);
-//	printf("%p\n", *line);
-//	test(&line);
 	if (check_identifiers(line))
 		return (free_array(line), 1);
-	free(line);
+	free_array(line);
 	return (0);
 }

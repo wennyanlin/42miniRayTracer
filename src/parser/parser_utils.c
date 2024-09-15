@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:00:53 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:37:24 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:46:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,21 @@ static int	count_lines(char *file)
 	close(fd);
 	return (i);
 }
-
-static void	reserve_malloc(char ***data, char *file, int fd, int count)
+/*
+static int	reserve_malloc(char ***data, char *file, int fd)
 {
-//	int	count;
-//
-//	count = count_lines(file);
-//	if (count == 0) //EMPTYFILE
-//		return (NULL);
+	int	count;
+
+	count = count_lines(file);
+	if (count == 0) //EMPTYFILE
+		return (1);
 	*data = malloc(sizeof(char *) * (count + 1));
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || !data)
 		system_error("malloc");
+	return (0);
 }
-
+*/
 char	**copy_elements(char *file)
 {
 	int		fd;
@@ -63,11 +64,14 @@ char	**copy_elements(char *file)
 	count = count_lines(file);
 	if (count == 0) //EMPTYFILE
 		return (NULL);
-/*	data = malloc(sizeof(char *) * (count + 1));
+	data = malloc(sizeof(char *) * (count + 1));
 	fd = open(file, O_RDONLY);
 	if (fd == -1 || !data)
 		system_error("malloc");
-*/	reserve_malloc(&data, file, fd, count);
+
+//	fd = -1;
+//	if (reserve_malloc(&data, file, fd))
+//		return (NULL);
 	i = 0;
 	while (1)
 	{
