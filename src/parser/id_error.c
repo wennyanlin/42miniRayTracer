@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:33:19 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:48:47 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:21:32 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,53 +30,87 @@ int	line_element_id(char *elem)
 		return (-1);
 }
 
-void	print_invalid_id(char *tmp)
+void	print_invalid_id(char *line)
 {
-	int len;
+	int		len;
+	char	*tmp;
 
 	len = 0;
+	tmp = ft_strtrim(line, " ");
 	while (tmp[len] != ' ')
 		len++;
-	ft_putstr_fd("Error: ",2);
+	ft_putstr_fd("Error: ", 2);
 	write(2, tmp, len);
 	ft_putendl_fd(": invalid identifier", 2);
+	free(tmp);
+}
 
+void	print_error_id(int num, char *id)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd(id, 2);
+	if (num > 1)
+		ft_putendl_fd(" identifier can only be declared once", 2);
+	else if (num == 0)
+		ft_putendl_fd(" identifier must be declared", 2);
+}
+
+int	check_invalid_id(int (*count)[4], char *line)
+{
+	char	*tmp;
+
+	tmp = ft_strtrim(line, " ");
+	if (line_element_id(tmp) == AMBIENT)
+		(*count)[0] += 1;
+	else if (line_element_id(tmp) == CAMERA)
+		(*count)[1] += 1;
+	else if (line_element_id(tmp) == LIGHT)
+		(*count)[2] += 1;
+	else if (line_element_id(tmp) >= SPHERE)
+		(*count)[3] += 1;
+	else if (line_element_id(tmp) == -1)
+		return (free(tmp), 1);
+//	printf("A:%d, C:%d, L:%d, obj:%d\n", (*count)[0], (*count)[1],(*count)[2], (*count)[3]);
+	return (free(tmp), 0);
 }
 
 int	check_identifiers(char **line)
 {
-	int		a;
-	int		c;
-	int		l;
-	int		obj;
+	int		count[4];
 	int		i;
-	char	*tmp;
+//	char	*tmp;
 
 	i = 0;
-	a = 0;
-	c = 0;
-	l = 0;
-	obj = 0;
-//	printf("%p\n", line[i]);
+	count[0] = 0;
+	count[1] = 0;
+	count[2] = 0;
+	count[3] = 0;
 	while (line[i])
 	{
-//	printf("%s", line[i]);
-		tmp = ft_strtrim(line[i], " ");
-//		printf("%s", tmp);
+		if (check_invalid_id(&count, line[i]))
+			return (print_invalid_id(line[i]), 1);
+	/*	tmp = ft_strtrim(line[i], " ");
 		if (line_element_id(tmp) == AMBIENT)
-			a++;
+			count[0]++;
 		else if (line_element_id(tmp) == CAMERA)
-			c++;
+			count[1]++;
 		else if (line_element_id(tmp) == LIGHT)
-			l++;
+			count[2]++;
 		else if (line_element_id(tmp) >= SPHERE)
-			obj++;
+			count[3]++;
 		else if (line_element_id(tmp) == -1)
-			return (print_invalid_id (tmp), 1);
+			return (print_invalid_id(tmp), free(tmp), 1);
+		free(tmp);*/
 		i++;
-		free(tmp);
 	}
-	
+	if (count[0] != 1)
+		return (print_error_id(count[0], "ambient A"), 1);
+	if (count[1] != 1)
+		return (print_error_id(count[1], "camera C"), 1);
+	if (count[2] != 1)
+		return (print_error_id(count[2], "light L"), 1);
+	if (count[3] == 0)
+		return(ft_putendl_fd("Error: you must declare at least one object", 2), 1);
 	return (0);
 }
 
