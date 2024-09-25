@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   system_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:50:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:08 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/14 15:45:09 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/14 18:31:20 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "miniRT.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <string.h>
+void	system_error_free_data(char *str, t_data *data)
+{
+	write(2, "error: ", 7);
+	perror(str);
+	if (data)
+		free_data(data);
+	exit(errno);
+}
 
-# include "libft.h"
-# include "structures.h"
-# include "macros.h"
-# include "parser.h"
-# include "utils.h"
-
-void	free_data(t_data *data);
-
-#endif
+void	system_error(char *str)
+{
+	write(2, "error: ", 7);
+	perror(str);
+	exit(errno);
+}

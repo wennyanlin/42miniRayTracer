@@ -15,14 +15,17 @@ INC_DIR		= inc/
 SRC_DIR		= src/
 OBJ_DIR		= obj/
 PARSE_DIR	= parser/
+UTILS_DIR	= utils/
 
 MAIN_FILES	= miniRT
-PARSE_FILES	= init
+PARSE_FILES	= init fill init_elements parser_utils init_objects
+UTILS_FILES	= print free_utils system_error
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))
+UTILS_SRCS	= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
-SRCS		:= $(MAIN_SRCS) $(PARSE_SRCS)
+SRCS		:= $(MAIN_SRCS) $(PARSE_SRCS) $(UTILS_SRCS)
 OBJS		:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRCS)))
 SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))

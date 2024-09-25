@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:50:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:08 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/12 16:49:43 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/14 18:30:27 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "miniRT.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <string.h>
+void	free_array(char **array)
+{
+	char	**tmp;
 
-# include "libft.h"
-# include "structures.h"
-# include "macros.h"
-# include "parser.h"
-# include "utils.h"
-
-void	free_data(t_data *data);
-
-#endif
+	tmp = array;
+	while (*array)
+	{
+		free(*array);
+		array++;
+	}
+	free(tmp);
+}

@@ -6,12 +6,12 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:21:38 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/02/08 18:41:31 by ale-tron         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:20:44 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/get_next_line.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen_gnl(char *str)
 {
 	int	i;
 
@@ -23,14 +23,14 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*string;
 	size_t	len;
 	int		i;
 	int		j;
 
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	len = ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1;
 	string = (char *)malloc(sizeof(char) * len);
 	if (string == NULL)
 		return (free(s1), NULL);
@@ -50,7 +50,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (free(s1), string);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_gnl(char *s, int c)
 {
 	char	ch;
 	int		i;
@@ -70,13 +70,13 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup_gnl(char *s1)
 {
 	int		len;
 	int		i;
 	char	*ptr;
 
-	len = ft_strlen(s1) + 1;
+	len = ft_strlen_gnl(s1) + 1;
 	ptr = (char *)malloc(len * sizeof(*ptr));
 	if (ptr == NULL)
 		return (NULL);
@@ -89,16 +89,16 @@ char	*ft_strdup(char *s1)
 	return (ptr);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
 	char	*string;
 	size_t	i;
 	size_t	j;
 	size_t	size;
 
-	if (start >= (unsigned int)ft_strlen(s))
-		return (ft_strdup(""));
-	size = ft_strlen(s + start);
+	if (start >= (unsigned int)ft_strlen_gnl(s))
+		return (ft_strdup_gnl(""));
+	size = ft_strlen_gnl(s + start);
 	if (len > size)
 		len = size;
 	string = (char *)malloc(sizeof(char) * (len + 1));

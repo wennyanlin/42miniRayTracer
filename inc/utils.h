@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/04 15:50:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:08 by cle-tron         ###   ########.fr       */
+/*   Created: 2024/09/12 16:44:07 by cle-tron          #+#    #+#             */
+/*   Updated: 2024/09/14 15:46:19 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <string.h>
+//PRINT
+void	print_data(t_data *data);
 
-# include "libft.h"
-# include "structures.h"
-# include "macros.h"
-# include "parser.h"
-# include "utils.h"
+//FREE_UTILS
+void	free_array(char **array);
 
-void	free_data(t_data *data);
+//SYSTEM_ERROR
+void	system_error_free_data(char *str, t_data *data);
+void	system_error(char *str);
 
 #endif
