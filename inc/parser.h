@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:51:08 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:18:35 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:16:44 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int		check_errors(int argc, char **argv);
 //ID_ERROR
 int		check_identifiers(char **line);
 
+//SPECIFIC_DATA_ERROR
+int		check_specific_data(char **line);
+
 //INIT
 void	init(char *file, t_data *data);
 
@@ -28,7 +31,6 @@ void	fill_coordinates(char *coordinates, double *xyz);
 void	init_ambient(char **elem, t_data *data);
 void	init_camera(char **elem, t_data *data);
 void	init_light(char **elem, t_data *data);
-
 
 //INIT_OBJECTS
 void	init_objects(char **elem, t_obj **obj, t_data *data);

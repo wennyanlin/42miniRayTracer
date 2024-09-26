@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 19:03:26 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:47:59 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:35:54 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	check_errors(int argc, char **argv)
 	line = copy_elements(argv[1]);
 	if (!line)
 		return (ft_putendl_fd("Error: empty file", 2), 1);
-	if (check_identifiers(line))
+	if (check_identifiers(line) || check_specific_data(line))
 		return (free_array(line), 1);
-	free_array(line);
-	return (0);
+	return (free_array(line), 0);
 }

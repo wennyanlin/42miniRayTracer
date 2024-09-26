@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:00:53 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/15 14:46:03 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:00:28 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,13 @@ static int	count_lines(char *file)
 	close(fd);
 	return (i);
 }
-/*
-static int	reserve_malloc(char ***data, char *file, int fd)
-{
-	int	count;
 
-	count = count_lines(file);
-	if (count == 0) //EMPTYFILE
-		return (1);
-	*data = malloc(sizeof(char *) * (count + 1));
-	fd = open(file, O_RDONLY);
-	if (fd == -1 || !data)
-		system_error("malloc");
-	return (0);
-}
-*/
-char	**copy_elements(char *file)
+void	fill_data(char ***data, int fd)
 {
-	int		fd;
-	int		count;
 	int		i;
 	char	*line;
-	char	**data;
+	char	*tmp;
 
-	count = count_lines(file);
-	if (count == 0) //EMPTYFILE
-		return (NULL);
-	data = malloc(sizeof(char *) * (count + 1));
-	fd = open(file, O_RDONLY);
-	if (fd == -1 || !data)
-		system_error("malloc");
-
-//	fd = -1;
-//	if (reserve_malloc(&data, file, fd))
-//		return (NULL);
 	i = 0;
 	while (1)
 	{
@@ -83,10 +56,28 @@ char	**copy_elements(char *file)
 			free(line);
 			continue ;
 		}
-		data[i++] = line;
+		tmp = ft_strtrim(line, "\n");
+		(*data)[i++] = tmp;
+		free(line);
 	}
+	(*data)[i] = NULL; //NOSE PUEDEQUITAR
+}
+
+char	**copy_elements(char *file)
+{
+	int		fd;
+	int		count;
+	char	**data;
+
+	count = count_lines(file);
+	if (count == 0) //EMPTYFILE
+		return (NULL);
+	data = malloc(sizeof(char *) * (count + 1));
+	fd = open(file, O_RDONLY);
+	if (fd == -1 || !data)
+		system_error("malloc");
+	fill_data(&data, fd);
 	close(fd);
-	data[i] = NULL; //NOSE PUEDEQUITAR
 	return (data);
 }
 

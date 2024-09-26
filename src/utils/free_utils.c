@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:49:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:30:27 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:37:40 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,14 @@ void	free_array(char **array)
 		array++;
 	}
 	free(tmp);
+}
+
+int	array_len(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
 }
