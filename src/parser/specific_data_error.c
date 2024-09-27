@@ -6,86 +6,22 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 15:16:52 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/26 18:46:42 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:58:51 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-
-int	double_syntax(char *arg)
+int	camera_error(char **elem)
 {
-	int	i;
-	int	point;
-
-	i = 0;
-	point = 0;
-	if ((arg[i] && arg[i] == '+') || (arg[i] && arg[i] == '-'))
-		i++;
-	while (arg[i])
-	{
-		if (arg[i] == '.')
-		{
-			point++;
-			i++;
-			if (point > 1)
-				return (1);
-		}
-		if (!ft_isdigit(arg[i]))
-			return (1);
-		i++;
-	}
-	if (!ft_isdigit(arg[i - 1]))
+	if (array_len(elem) != 4)
+		return (ft_putendl_fd(\
+		"Error: Camera needs 3 parameters: coordinates, vectors, fov", 2), 1);
+	if (check_xyz(elem[1], elem[0], "coordinates"))
+		return (1);
+	if (check_xyz(elem[2], elem[0], "vectors"))
 		return (1);
 	return (0);
-}
-
-
-int	check_ratio(char *ratio, char *id)
-{
-	if (double_syntax(ratio))
-	{
-		ft_putstr_fd("Error: \"", 2);
-		ft_putstr_fd(ratio, 2);
-		ft_putstr_fd("\" the syntax for the ratio value in the ", 2);
-		ft_putstr_fd(id, 2);
-		ft_putendl_fd(" parameter is incorrect", 2);
-		return (1);
-	}
-	if (ft_atod(ratio) < 0 || ft_atod(ratio) > 1)
-	{
-		ft_putstr_fd("Error: \"", 2);
-		ft_putstr_fd(ratio, 2);
-		ft_putstr_fd("\" the ratio value in the ", 2);
-		ft_putstr_fd(id, 2);
-		ft_putendl_fd(" parameter should be within the [0.0,1.0] range", 2);
-		return (1);
-	}
-	return (0);
-}
-
-int	check_rgb(char *arg, char *id)
-{
-	char	**rgb;
-//	int		i;
-
-	rgb = ft_split(arg, ',');
-	if (array_len(rgb) != 3)
-	{
-		ft_putstr_fd("Error: \"", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("\" the rgb parameter should have 3 values in the ", 2);
-		ft_putstr_fd(id, 2);
-		ft_putendl_fd(" parameter", 2);
-		return (free_array(rgb), 1);
-	}
-/*	while (rgb[i])
-	{
-	//INT SYNTAX
-	//RGB VALUE RANGE
-		i++;
-	}*/
-	return (free_array(rgb), 0);
 }
 
 int	ambient_error(char **elem)
@@ -108,13 +44,12 @@ int	check_specific_data(char **line)
 	i = 0;
 	while (line[i])
 	{
-//		printf("%s", line[i]);
 		elem = ft_split(line[i], ' ');
 		if (element_id(elem[0]) == AMBIENT && ambient_error(elem))
 			return (free_array(elem), 1);
-/*		else if (element_id(elem[0]) == CAMERA)
-			camera_error(elem);
-		else if (element_id(elem[0]) == LIGHT)
+		else if (element_id(elem[0]) == CAMERA && camera_error(elem))
+			return (free_array(elem), 1);
+/*		else if (element_id(elem[0]) == LIGHT)
 			light_error(elem);
 		else if (element_id(elem[0]) == SPHERE)
 			sphere_error(elem);
