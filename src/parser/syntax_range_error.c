@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:05:42 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/27 17:09:41 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:41:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ int	check_rgb(char *arg, char *id)
 	while (rgb[i])
 	{
 		if (int_syntax(rgb[i]))
-			return (print_syntax_error(rgb[i], "color", "integer", id), \
-														free_array(rgb), 1);
+		{
+			print_syntax_error(rgb[i], "color", "integer", id);
+			return (free_array(rgb), 1);
+		}
 		if (ft_strlen(rgb[i]) > 9 || ft_atoi(rgb[i]) < 0 || \
 														ft_atoi(rgb[i]) > 255)
-			return (print_range_error(rgb[i], "color", id, "0,255"), \
-															free_array(rgb), 1);
+		{
+			print_range_error(rgb[i], "color", id, "0,255");
+			return (free_array(rgb), 1);
+		}
 		i++;
 	}
 	return (free_array(rgb), 0);
@@ -56,10 +60,28 @@ int	check_xyz(char *arg, char *id, char *type)
 	while (xyz[i])
 	{
 		if (double_syntax(xyz[i]))
-			return (print_syntax_error(xyz[i], type, "double", id), \
-														free_array(xyz), 1);
-
+		{
+			print_syntax_error(xyz[i], type, "double", id);
+			return (free_array(xyz), 1);
+		}
+		if (ft_strncmp(type, "vector", 7) == 0)
+		{
+			if (ft_atod(xyz[i]) < -1 || ft_atod(xyz[i]) > 1)
+			{
+				print_range_error(xyz[i], type, id, "-1,1");
+				return (free_array(xyz), 1);
+			}
+		}
 		i++;
 	}
 	return (free_array(xyz), 0);
+}
+
+int	check_measure(char *arg, char *id, char *type)
+{
+	if (double_syntax(arg))
+		return (print_syntax_error(arg, type, "double", id), 1);
+	if (ft_atod(arg) <= 0)
+		return (print_positive_error(arg, type, id), 1);
+	return (0);
 }

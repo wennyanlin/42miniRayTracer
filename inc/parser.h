@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:51:08 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/27 16:56:35 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:41:35 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,22 @@ int		check_identifiers(char **line);
 //SPECIFIC_DATA_ERROR
 int		check_specific_data(char **line);
 
+//OBJECT_ERROR
+int		sphere_error(char **elem);
+int		plane_error(char **elem);
+int		cylinder_error(char **elem);
+
 //SYNTAX_RANGE_ERROR
 int		check_ratio(char *ratio, char *id);
 int		check_rgb(char *arg, char *id);
 int		check_xyz(char *arg, char *id, char *type);
+int		check_measure(char *arg, char *id, char *type);
 
 //PRINT_ERROR
 void	print_range_error(char *arg, char *type, char *id, char *range);
 void	print_array_error(char *arg, char *type, char *id);
 void	print_syntax_error(char *arg, char *type, char *data, char *id);
-
+void	print_positive_error(char *arg, char *type, char *id);
 
 //CHECK_SYNTAX
 int		double_syntax(char *arg);
