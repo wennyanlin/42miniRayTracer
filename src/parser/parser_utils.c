@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:00:53 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/26 18:00:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:56:15 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	fill_data(char ***data, int fd)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!line) //NOSE PUEDEQUITAR
+		if (!line)
 			break ;
 		if (line && !ft_strncmp(line, "\n", 2))
 		{
@@ -60,7 +60,7 @@ void	fill_data(char ***data, int fd)
 		(*data)[i++] = tmp;
 		free(line);
 	}
-	(*data)[i] = NULL; //NOSE PUEDEQUITAR
+	(*data)[i] = NULL;
 }
 
 char	**copy_elements(char *file)
@@ -70,7 +70,7 @@ char	**copy_elements(char *file)
 	char	**data;
 
 	count = count_lines(file);
-	if (count == 0) //EMPTYFILE
+	if (count == 0)
 		return (NULL);
 	data = malloc(sizeof(char *) * (count + 1));
 	fd = open(file, O_RDONLY);

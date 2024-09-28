@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:52:44 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:24:14 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:54:22 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ void	print_positive_error(char *arg, char *type, char *id)
 	ft_putstr_fd(id, 2);
 	ft_putendl_fd("\" parameter must be a positive number", 2);
 }
-

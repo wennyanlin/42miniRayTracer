@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/27 15:11:21 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:55:39 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	init(char *file, t_data *data)
 	data->obj = NULL;
 	while (line[i])
 	{
-		printf("%s\n", line[i]); ///BORRAR
 		elem = ft_split(line[i], ' ');
 		if (element_id(elem[0]) == AMBIENT)
 			init_ambient(elem, data);

@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:45:09 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:31:20 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:01:22 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	system_error_free_data(char *str, t_data *data)
 {
-	write(2, "error: ", 7);
+	write(2, "Error: ", 7);
 	perror(str);
 	if (data)
 		free_data(data);
@@ -23,7 +23,7 @@ void	system_error_free_data(char *str, t_data *data)
 
 void	system_error(char *str)
 {
-	write(2, "error: ", 7);
+	write(2, "Error: ", 7);
 	perror(str);
 	exit(errno);
 }

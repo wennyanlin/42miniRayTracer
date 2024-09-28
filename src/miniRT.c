@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/26 18:35:07 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:58:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_data(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-	
+
 	if (check_errors(argc, argv))
 		return (1);
 	data = malloc(sizeof(t_data));

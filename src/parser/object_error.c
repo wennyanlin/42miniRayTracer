@@ -6,12 +6,11 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 14:21:40 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:41:24 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:06:52 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
 
 int	sphere_error(char **elem)
 {
@@ -45,8 +44,8 @@ int	cylinder_error(char **elem)
 {
 	if (array_len(elem) != 6)
 		return (ft_putendl_fd(\
-		"Error: Plane needs 5 parameters: coordinates, vectors, diameter, \
-		height, color", 2), 1);
+	"Error: Plane needs 5 parameters: coordinates, vectors, diameter, height, \
+color", 2), 1);
 	if (check_xyz(elem[1], elem[0], "coordinate"))
 		return (1);
 	if (check_xyz(elem[2], elem[0], "vector"))
@@ -58,8 +57,4 @@ int	cylinder_error(char **elem)
 	if (check_rgb(elem[5], elem[0]))
 		return (1);
 	return (0);
-
-
-
-
 }
