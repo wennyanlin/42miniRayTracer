@@ -6,29 +6,18 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:58:10 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:18:21 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	free_data(t_data *data)
+void	init_mlx(t_data *data)
 {
-	t_obj	*tmp;
-
-	if (data->amb)
-		free(data->amb);
-	if (data->cam)
-		free(data->cam);
-	if (data->light)
-		free(data->light);
-	while (data->obj)
-	{
-		tmp = data->obj;
-		data->obj = data->obj->next;
-		free(tmp);
-	}
-	free(data);
+	data->conn = mlx_init();
+	data->win = mlx_new_window(data->conn, 1920, 1080, "Hello world!");
+	mlx_loop(data->conn);
+	(void)data->win;
 }
 
 int	main(int argc, char **argv)
@@ -42,6 +31,7 @@ int	main(int argc, char **argv)
 		system_error("malloc");
 	init(argv[1], data);
 	print_data(data);
+	init_mlx(data);
 	free_data(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 14:30:58 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:17:50 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_obj
 
 typedef struct s_data
 {
+	void	*conn;
+	void	*win;
 	t_amb	*amb;
 	t_cam	*cam;
 	t_light	*light;

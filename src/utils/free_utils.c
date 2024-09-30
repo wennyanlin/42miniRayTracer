@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:49:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/26 15:37:40 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:11:04 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,23 @@ int	array_len(char **array)
 	while (array[i])
 		i++;
 	return (i);
+}
+
+void	free_data(t_data *data)
+{
+	t_obj	*tmp;
+
+	if (data->amb)
+		free(data->amb);
+	if (data->cam)
+		free(data->cam);
+	if (data->light)
+		free(data->light);
+	while (data->obj)
+	{
+		tmp = data->obj;
+		data->obj = data->obj->next;
+		free(tmp);
+	}
+	free(data);
 }

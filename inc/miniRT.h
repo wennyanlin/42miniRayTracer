@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/27 12:51:08 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:00:20 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <limits.h>
 
 # include "libft.h"
+# include "mlx.h"
 # include "structures.h"
 # include "macros.h"
 # include "parser.h"
 # include "utils.h"
 
-void	free_data(t_data *data);
 
 #endif
