@@ -2,15 +2,17 @@ NAME		= miniRT
 
 CC			= gcc
 CFLAGS		= -Werror -Wall -Wextra -g -fsanitize=address
-LIB_FLAG	= -L${LIBFT_DIR} -lft
+LIB_FLAG	= -L${LIBFT_DIR} -lft -L${MLX_DIR} -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 DEP_FLAG	= -MMD -MP
-INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/
+INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/ -I${MLX_DIR} -I/usr/include
+A_FILES		= $(LIBFT_DIR)libft.a $(MLX_DIR)libmlx.a $(MLX_DIR)libmlx_Linux.a
 RMF			= rm -f
 RMD			= rm -rf
 MKDIR		= mkdir -p
 
 
 LIBFT_DIR	= lib/libft/
+MLX_DIR		= lib/mlx/
 INC_DIR		= inc/
 SRC_DIR		= src/
 OBJ_DIR		= obj/
@@ -18,7 +20,7 @@ PARSE_DIR	= parser/
 UTILS_DIR	= utils/
 
 MAIN_FILES	= miniRT
-PARSE_FILES	= init fill init_elements parser_utils init_objects
+PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error specific_data_error syntax_range_error check_syntax print_error object_error
 UTILS_FILES	= print free_utils system_error
 
 MAIN_SRCS	= $(MAIN_FILES)
@@ -30,7 +32,10 @@ OBJS		:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRCS)))
 SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))
 
-all: libft	$(NAME)
+all: libft mlx $(NAME)
+
+mlx:	
+		make -C $(MLX_DIR)
 
 libft:	
 		@make -C $(LIBFT_DIR) --silent
@@ -38,13 +43,14 @@ libft:
 $(NAME):	$(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) $(LIB_FLAG) -o $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile $(LIBFT_DIR)libft.a
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c Makefile $(A_FILES)
 			$(MKDIR) $(dir $@)
 			$(CC) $(CFLAGS) $(INCLUDE) $(DEP_FLAG) -o $@ -c $<
 
 clean:	
 		$(RMD) $(OBJ_DIR)
 		make clean -C $(LIBFT_DIR)
+		make clean -C $(MLX_DIR)
 
 fclean:	clean
 		$(RMF) $(NAME)

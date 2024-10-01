@@ -6,14 +6,14 @@
 /*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:40:06 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 16:06:53 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:02:53 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../inc/get_next_line.h"
 
 void	minirt_error(void)
 {
-	perror("error: read function");
+	perror("Error: read function");
 	exit(errno);
 }
 

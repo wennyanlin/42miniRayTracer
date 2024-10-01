@@ -6,65 +6,41 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:28:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:55:39 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	count_lines(char *file)
+void	init_ambient(char **elem, t_data *data)
 {
-	int		fd;
-	int		i;
-	char	*line;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		system_error(file);
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, "\n", 1))
-		{
-			free(line);
-			continue ;
-		}
-		i++;
-		free(line);
-	}
-	close(fd);
-	return (i);
+	data->amb = malloc(sizeof(t_amb));
+	if (!data->amb)
+		system_error_free_data("malloc", data);
+	data->amb->id = AMBIENT;
+	data->amb->ratio = ft_atod(elem[1]);
+	fill_rgb(elem[2], data->amb->rgb);
 }
 
-char	**copy_elements(char *file)
+void	init_camera(char **elem, t_data *data)
 {
-	int		fd;
-	int		i;
-	int		count;
-	char	*line;
-	char	**data;
+	data->cam = malloc(sizeof(t_cam));
+	if (!data->cam)
+		system_error_free_data("malloc", data);
+	data->cam->id = CAMERA;
+	fill_coordinates(elem[1], data->cam->xyz);
+	fill_coordinates(elem[2], data->cam->vc);
+	data->cam->fov = ft_atoi(elem[3]);
+}
 
-	count = count_lines(file);
-	data = malloc(sizeof(char *) * (count + 1));
-	fd = open(file, O_RDONLY);
-	if (fd == -1 || !data)
-		system_error("malloc");
-	i = 0;
-	while (line)
-	{
-		line = get_next_line(fd);
-		if (line && !ft_strncmp(line, "\n", 2))
-		{
-			free(line);
-			continue ;
-		}
-		data[i++] = line;
-	}
-	close(fd);
-	return (data);
+void	init_light(char **elem, t_data *data)
+{
+	data->light = malloc(sizeof(t_light));
+	if (!data->light)
+		system_error_free_data("malloc", data);
+	data->light->id = LIGHT;
+	fill_coordinates(elem[1], data->light->xyz);
+	data->light->ratio = ft_atod(elem[2]);
 }
 
 void	init(char *file, t_data *data)
@@ -78,7 +54,6 @@ void	init(char *file, t_data *data)
 	data->obj = NULL;
 	while (line[i])
 	{
-		printf("%s", line[i]);
 		elem = ft_split(line[i], ' ');
 		if (element_id(elem[0]) == AMBIENT)
 			init_ambient(elem, data);
