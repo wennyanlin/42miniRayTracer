@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:31:56 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 16:07:40 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:25:41 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	skip_space_and_sign(char *str, int *sign)
 		i++;
 	if ((str[i] && str[i] == '+') || (str[i] && str[i] == '-'))
 		i++;
-	if (str[i - 1] == '-')
+	if (i > 0 && str[i - 1] == '-')
 		*sign = -1;
 	return (i);
 }
