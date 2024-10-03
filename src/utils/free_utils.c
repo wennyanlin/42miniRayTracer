@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:49:43 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/30 12:11:04 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:33:08 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,14 @@ void	free_data(t_data *data)
 		data->obj = data->obj->next;
 		free(tmp);
 	}
+	if (data->img->img)
+		mlx_destroy_image(data->conn, data->img->img);
+	if (data->img)
+		free(data->img);
+	if (data->win)
+		mlx_destroy_window(data->conn, data->win);
+	if (data->conn)
+		mlx_destroy_display(data->conn);
+	free(data->conn);
 	free(data);
 }

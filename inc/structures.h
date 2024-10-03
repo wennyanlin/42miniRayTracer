@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/30 13:17:50 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:54:53 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,20 @@ typedef struct s_obj
 	struct s_obj	*next;
 }	t_obj;
 
+typedef struct t_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line;
+	int		endian;
+}	t_img;
+
 typedef struct s_data
 {
 	void	*conn;
 	void	*win;
+	t_img	*img;
 	t_amb	*amb;
 	t_cam	*cam;
 	t_light	*light;

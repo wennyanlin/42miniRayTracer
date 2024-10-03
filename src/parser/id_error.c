@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 11:33:19 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/30 13:51:00 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:48:16 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	print_invalid_id(char *line)
 
 	len = 0;
 	tmp = ft_strtrim(line, " ");
-//	printf("%s\n", tmp);
 	while (tmp[len] != '\0' && tmp[len] != ' ')
 		len++;
 	ft_putstr_fd("Error: ", 2);
