@@ -1,7 +1,7 @@
 NAME		= miniRT
 
 CC			= gcc
-CFLAGS		= -Werror -Wall -Wextra -g -fsanitize=address
+CFLAGS		= -Werror -Wall -Wextra #-g -fsanitize=address
 LIB_FLAG	= -L${LIBFT_DIR} -lft -L${MLX_DIR} -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 DEP_FLAG	= -MMD -MP
 INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/ -I${MLX_DIR} -I/usr/include

@@ -6,13 +6,13 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:55:39 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:39:08 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	init_ambient(char **elem, t_data *data)
+static void	init_ambient(char **elem, t_data *data)
 {
 	data->amb = malloc(sizeof(t_amb));
 	if (!data->amb)
@@ -22,7 +22,7 @@ void	init_ambient(char **elem, t_data *data)
 	fill_rgb(elem[2], data->amb->rgb);
 }
 
-void	init_camera(char **elem, t_data *data)
+static void	init_camera(char **elem, t_data *data)
 {
 	data->cam = malloc(sizeof(t_cam));
 	if (!data->cam)
@@ -33,7 +33,7 @@ void	init_camera(char **elem, t_data *data)
 	data->cam->fov = ft_atoi(elem[3]);
 }
 
-void	init_light(char **elem, t_data *data)
+static void	init_light(char **elem, t_data *data)
 {
 	data->light = malloc(sizeof(t_light));
 	if (!data->light)
@@ -41,6 +41,17 @@ void	init_light(char **elem, t_data *data)
 	data->light->id = LIGHT;
 	fill_coordinates(elem[1], data->light->xyz);
 	data->light->ratio = ft_atod(elem[2]);
+}
+
+static void	initialize_data(t_data *data)
+{
+	data->conn = NULL;
+	data->win = NULL;
+	data->img = NULL;
+	data->amb = NULL;
+	data->cam = NULL;
+	data->light = NULL;
+	data->obj = NULL;
 }
 
 void	init(char *file, t_data *data)
@@ -51,7 +62,7 @@ void	init(char *file, t_data *data)
 
 	line = copy_elements(file);
 	i = 0;
-	data->obj = NULL;
+	initialize_data(data);
 	while (line[i])
 	{
 		elem = ft_split(line[i], ' ');
