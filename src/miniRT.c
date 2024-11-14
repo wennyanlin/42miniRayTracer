@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/03 14:46:41 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:15:27 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,22 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	render(t_data *data)
 {
-	int	x;
-	int	y;
-
-	x = 50;
-	while (x < 200)
+	int		x;
+	int		y;
+	t_ray	ray;
+	double	t;
+	int		bool;
+	
+	x = 0;
+	while (x < 2000)
 	{
-		y = 50;
-		while (y < 200)
+		y = 0;
+		while (y < 1500)
 		{
-			my_mlx_pixel_put(data->img, x, y, 0x00FF0000);
+			ray = generate_ray(*(data->cam), x, y, 2000, 1500);
+			bool = intersect_sphere(ray, *(data->obj), &t);
+			if (bool)
+				my_mlx_pixel_put(data->img, x, y, 0x00FF0000);
 			y++;
 		}
 		x++;
