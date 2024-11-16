@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 15:29:10 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/16 20:18:56 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	init_mlx(t_data *data)
 	data->conn = mlx_init();
 	if (!data->conn)
 		system_error_free_data("mlx_init", data);
-	data->win = mlx_new_window(data->conn, 1600, 900, "miniRT");
+	data->win = mlx_new_window(data->conn, WIDTH, HEIGHT, "miniRT");
 	if (!data->win)
 		system_error_free_data("mlx_new_window", data);
-	data->img->img = mlx_new_image(data->conn, 1600, 900);
+	data->img->img = mlx_new_image(data->conn, WIDTH, HEIGHT);
 	if (!data->img->img)
 		system_error_free_data("mlx_new_image", data);
 	data->img->addr = mlx_get_data_addr(data->img->img, &data->img->bpp, \
@@ -60,13 +60,13 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-t_view    init_view_params(t_cam camera, int screen_width, int screen_height)
+t_view    init_view_params(t_cam camera)
 {
 	t_view	view_params;
 	double world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
 
-	view_params.aspect_ratio = (double)screen_width / (double)screen_height;
-	view_params.scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
+	view_params.aspect_ratio = (double)WIDTH / (double)HEIGHT;
+	view_params.fov_scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
 	// Calculate Camera Basis Vectors (Right and Up)
 	vec_cross(view_params.cam_right, world_up, camera.vc); // Cross product to get cam_right
 	vec_normalize(view_params.cam_right);
@@ -82,16 +82,15 @@ void	render(t_data *data)
 	t_ray	ray;
 	double	t;
 	int		bool;
-	t_view	view_params;
 
-	view_params = init_view_params(*(data->cam), 1600, 900);
+	data->view_params = init_view_params(*(data->cam));
 	x = 0;
-	while (x < 1600)
+	while (x < WIDTH)
 	{
 		y = 0;
-		while (y < 900)
+		while (y < HEIGHT)
 		{
-			ray = generate_ray(*(data->cam), view_params, x, y, 1600, 900);
+			ray = generate_ray(*(data->cam), data->view_params, x, y);
 			bool = intersect_sphere(ray, *(data->obj), &t);
 			if (bool)
 				my_mlx_pixel_put(data->img, x, y, 0x00FF0000);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 17:48:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:52:45 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:02:53 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,8 @@
 # define SPHERE		4
 # define PLANE		5
 # define CYLINDER	6
+
+# define WIDTH      1600
+# define HEIGHT     900
 
 #endif

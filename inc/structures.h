@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 15:16:18 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/16 20:18:56 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct t_img
 typedef struct s_view
 {
 	double	aspect_ratio;
-	double	scale;
+	double	fov_scale;
 	double	cam_right[3];
 	double	cam_up[3];
 }	t_view;
@@ -78,6 +78,7 @@ typedef struct s_data
 	t_cam	*cam;
 	t_light	*light;
 	t_obj	*obj;
+	t_view	view_params;
 }	t_data;
 
 #endif
