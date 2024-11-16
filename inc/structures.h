@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/14 19:55:54 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/16 15:16:18 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ typedef struct t_img
 	int		line;
 	int		endian;
 }	t_img;
+
+typedef struct s_view
+{
+	double	aspect_ratio;
+	double	scale;
+	double	cam_right[3];
+	double	cam_up[3];
+}	t_view;
 
 typedef struct s_data
 {
