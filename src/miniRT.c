@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 20:18:56 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/18 22:20:22 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,12 @@ void	render(t_data *data)
 		while (y < HEIGHT)
 		{
 			ray = generate_ray(*(data->cam), data->view_params, x, y);
-			bool = intersect_sphere(ray, *(data->obj), &t);
+			if (data->obj->id == PLANE)
+				bool = intersect_infinite_plane(ray, *(data->obj), &t);
+			if (data->obj->id == SPHERE)
+				bool = intersect_sphere(ray, *(data->obj), &t);
+			else if (data->obj->id == CYLINDER)
+				bool = intersect_cylinder(ray, *(data->obj), &t);
 			if (bool)
 				my_mlx_pixel_put(data->img, x, y, 0x00FF0000);
 			y++;

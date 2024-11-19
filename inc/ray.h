@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:15:36 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/16 20:03:46 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/18 22:17:29 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 t_ray   generate_ray(t_cam camera, t_view view_params, int x, int y);
 int     intersect_sphere(t_ray ray, t_obj sphere, double *t);
+int     intersect_cylinder(t_ray ray, t_obj cylinder, double *t);
+int     intersect_infinite_plane(t_ray ray, t_obj plane, double *t);
 
 
 void    vec_add(double result[3], double a[3], double b[3]);
