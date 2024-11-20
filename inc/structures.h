@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/03 12:54:53 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:18:56 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_ray
+{
+	double	origin[3];
+	double	direction[3];
+}	t_ray;
 
 typedef struct s_amb
 {
@@ -55,6 +61,14 @@ typedef struct t_img
 	int		endian;
 }	t_img;
 
+typedef struct s_view
+{
+	double	aspect_ratio;
+	double	fov_scale;
+	double	cam_right[3];
+	double	cam_up[3];
+}	t_view;
+
 typedef struct s_data
 {
 	void	*conn;
@@ -64,6 +78,7 @@ typedef struct s_data
 	t_cam	*cam;
 	t_light	*light;
 	t_obj	*obj;
+	t_view	view_params;
 }	t_data;
 
 #endif

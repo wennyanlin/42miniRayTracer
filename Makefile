@@ -18,16 +18,20 @@ SRC_DIR		= src/
 OBJ_DIR		= obj/
 PARSE_DIR	= parser/
 UTILS_DIR	= utils/
+RAY_DIR		= ray/
 
 MAIN_FILES	= miniRT
 PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error specific_data_error syntax_range_error check_syntax print_error object_error
 UTILS_FILES	= print free_utils system_error
+RAY_FILES	= generate_ray vec_math intersect ray_utils
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))
 UTILS_SRCS	= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
+RAY_SRCS	= $(addprefix $(RAY_DIR), $(RAY_FILES))
 
-SRCS		:= $(MAIN_SRCS) $(PARSE_SRCS) $(UTILS_SRCS)
+
+SRCS		:= $(MAIN_SRCS) $(PARSE_SRCS) $(UTILS_SRCS) $(RAY_SRCS)
 OBJS		:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRCS)))
 SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))

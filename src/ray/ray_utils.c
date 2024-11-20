@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 17:48:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 20:02:53 by wlin             ###   ########.fr       */
+/*   Created: 2024/11/16 14:42:57 by wlin              #+#    #+#             */
+/*   Updated: 2024/11/16 14:49:05 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "miniRT.h"
 
-# define AMBIENT	1
-# define CAMERA		2
-# define LIGHT		3
-# define SPHERE		4
-# define PLANE		5
-# define CYLINDER	6
-
-# define WIDTH      1600
-# define HEIGHT     900
-
-#endif
+void    vec_copy(double vec_dest[3], double vec_src[3])
+{
+    vec_dest[0] = vec_src[0];
+    vec_dest[1] = vec_src[1];
+    vec_dest[2] = vec_src[2];
+}
