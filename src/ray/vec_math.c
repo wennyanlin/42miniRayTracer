@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:29:23 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/16 14:20:26 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:42:50 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,8 @@ void vec_cross(double result[3], double a[3], double b[3])
     result[2] = a[0] * b[1] - a[1] * b[0];
 }
 
+void  ray_at_t(double result[3], t_ray ray, double t)
+{
+    vec_scale(result, ray.direction, t);
+    vec_add(result, ray.origin, result);
+}

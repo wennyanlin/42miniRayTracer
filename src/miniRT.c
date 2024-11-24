@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/18 22:20:22 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:40:33 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	render(t_data *data)
 			else if (data->obj->id == CYLINDER)
 				bool = intersect_cylinder(ray, *(data->obj), &t);
 			if (bool)
-				my_mlx_pixel_put(data->img, x, y, 0x00FF0000);
+				my_mlx_pixel_put(data->img, x, y, ray_color(ray, *(data->obj), t));
 			y++;
 		}
 		x++;

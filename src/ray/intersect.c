@@ -6,11 +6,25 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/19 10:06:51 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/24 21:40:47 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+int ray_color(t_ray ray, t_obj sphere, double t) 
+{
+    double  result[3];
+
+    if (t > 0.0) 
+    {
+        ray_at_t(result, ray, t);
+        vec_sub(result, result, sphere.xyz);
+        vec_normalize(result);
+        vec_scale(result, (double [3]){result[0] + 1, result[1] + 1, result[2] + 1}, 0.5);
+    }
+    return (color_converter(result));
+}
 
 int intersect_sphere(t_ray ray, t_obj sphere, double *t)
 {
