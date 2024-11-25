@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/24 21:40:33 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/26 00:26:50 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	render(t_data *data)
 	int		y;
 	t_ray	ray;
 	double	t;
-	int		bool;
+	int		hit_flag;
 
 	data->view_params = init_view_params(*(data->cam));
 	x = 0;
@@ -92,12 +92,12 @@ void	render(t_data *data)
 		{
 			ray = generate_ray(*(data->cam), data->view_params, x, y);
 			if (data->obj->id == PLANE)
-				bool = intersect_infinite_plane(ray, *(data->obj), &t);
+				hit_flag = intersect_infinite_plane(ray, *(data->obj), &t);
 			if (data->obj->id == SPHERE)
-				bool = intersect_sphere(ray, *(data->obj), &t);
+				hit_flag = intersect_sphere(ray, *(data->obj), &t);
 			else if (data->obj->id == CYLINDER)
-				bool = intersect_cylinder(ray, *(data->obj), &t);
-			if (bool)
+				hit_flag = hit_cylinder(ray, *(data->obj), &t);
+			if (hit_flag)
 				my_mlx_pixel_put(data->img, x, y, ray_color(ray, *(data->obj), t));
 			y++;
 		}

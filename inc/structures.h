@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 20:18:56 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/26 00:49:29 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ typedef struct s_view
 	double	cam_right[3];
 	double	cam_up[3];
 }	t_view;
+
+typedef	struct s_hit
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	t0;
+	double	t1;
+	int		hit_flag;
+}	t_hit;
+
 
 typedef struct s_data
 {
