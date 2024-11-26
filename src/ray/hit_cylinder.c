@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/26 00:51:09 by wlin             ###   ########.fr       */
+/*   Updated: 2024/11/26 00:59:44 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	find_hit_t(t_hit *hit, double *t)
 	return (true);
 }
 
-bool	check_body_hit(t_ray ray, t_obj cy, t_hit *hit, double *t)
+bool	check_body_hit(t_ray ray, t_obj cy, double *t)
 {
 	double	projection;
 	double	sub_result[3];
@@ -94,7 +94,7 @@ int	hit_cylinder(t_ray ray, t_obj cy, double *t)
 	hit.discriminant = hit.b * hit.b - 4 * hit.a * hit.c;
 	if (hit.discriminant < 0 || !find_hit_t(&hit, t))
 		return (0);
-	if (check_body_hit(ray, cy, &hit, t))
+	if (check_body_hit(ray, cy, t))
 		hit.hit_flag = 1;
 	if (check_caps_hit(ray, cy, t, &(hit.hit_flag)))
 		hit.hit_flag = 1;
