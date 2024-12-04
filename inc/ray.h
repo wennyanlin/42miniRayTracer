@@ -13,14 +13,13 @@
 #ifndef RAY_H
 # define RAY_H
 
-t_ray   generate_ray(t_cam camera, t_view view_params, int x, int y);
-int     intersect_sphere(t_ray ray, t_obj sphere, double *t);
-int     hit_cylinder(t_ray ray, t_obj cylinder, double *t);
-int     intersect_plane(t_ray ray, double *plane_point, double *plane_normal, double radius, double *t);
-int     intersect_infinite_plane(t_ray ray, t_obj plane, double *t);
-int     color_converter(double color[3]);
-int     ray_color(t_ray ray, t_obj obj, double t);
-void    ray_at_t(double result[3], t_ray ray, double t);
+t_ray	generate_ray(t_cam camera, t_view view_params, int x, int y);
+bool	intersect_sphere(t_ray ray, t_obj sphere, double *t);
+bool	hit_cylinder(t_ray ray, t_obj cylinder, double *t);
+int		color_converter(double color[3]);
+int		ray_color(t_ray ray, t_obj obj, double t);
+void	ray_at_t(double result[3], t_ray ray, double t);
+int		check_caps_hit(t_ray ray, t_obj cy, double *t, int *hit_flag);
 
 //Math Calculation
 void    vec_add(double result[3], double a[3], double b[3]);
