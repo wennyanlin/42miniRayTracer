@@ -1,7 +1,7 @@
 NAME		= miniRT
 
 CC			= gcc
-CFLAGS		= -Werror -Wall -Wextra #-g -fsanitize=address
+CFLAGS		= -Werror -Wall -Wextra -g -fsanitize=address
 LIB_FLAG	= -L${LIBFT_DIR} -lft -L${MLX_DIR} -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 DEP_FLAG	= -MMD -MP
 INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/ -I${MLX_DIR} -I/usr/include
@@ -21,9 +21,12 @@ UTILS_DIR	= utils/
 RAY_DIR		= ray/
 
 MAIN_FILES	= miniRT
-PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error specific_data_error syntax_range_error check_syntax print_error object_error
+PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error\
+			  specific_data_error syntax_range_error check_syntax print_error\
+			  object_error
 UTILS_FILES	= print free_utils system_error
-RAY_FILES	= generate_ray vec_math intersect ray_utils
+RAY_FILES	= generate_ray vec_math intersect ray_utils hit_cylinder\
+			  hit_cylinder_caps hit_plane
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))

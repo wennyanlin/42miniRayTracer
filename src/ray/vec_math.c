@@ -6,55 +6,83 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:29:23 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/16 14:20:26 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/05 16:35:10 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void vec_add(double result[3], double a[3], double b[3])
+void	vec_add(double result[3], double a[3], double b[3])
 {
-    result[0] = a[0] + b[0];
-    result[1] = a[1] + b[1];
-    result[2] = a[2] + b[2];
+	result[0] = a[0] + b[0];
+	result[1] = a[1] + b[1];
+	result[2] = a[2] + b[2];
 }
 
-void vec_normalize(double v[3])
+double	vec_length(double vec[3])
 {
-    double magnitude = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
-    if (magnitude > 0)
-    {
-        v[0] /= magnitude;
-        v[1] /= magnitude;
-        v[2] /= magnitude;
-    }
+	return (sqrt(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]));
 }
 
-void vec_sub(double result[3], double a[3], double b[3])
+void	vec_normalize(double vec[3])
 {
-    result[0] = a[0] - b[0];
-    result[1] = a[1] - b[1];
-    result[2] = a[2] - b[2];
+	double	magnitude;
+	
+	magnitude = vec_length(vec);
+	if (magnitude > 0)
+	{
+		vec[0] /= magnitude;
+		vec[1] /= magnitude;
+		vec[2] /= magnitude;
+	}
 }
 
-void vec_scale(double result[3], double v[3], double scalar)
+void	vec_sub(double result[3], double a[3], double b[3])
 {
-    result[0] = v[0] * scalar;
-    result[1] = v[1] * scalar;
-    result[2] = v[2] * scalar;
+	result[0] = a[0] - b[0];
+	result[1] = a[1] - b[1];
+	result[2] = a[2] - b[2];
 }
 
-double vec_dot(double a[3], double b[3])
+void	vec_scale(double result[3], double vec[3], double scalar)
 {
-    return (a[0] * b[0] + 
-            a[1] * b[1] + 
-            a[2] * b[2]);
+	result[0] = vec[0] * scalar;
+	result[1] = vec[1] * scalar;
+	result[2] = vec[2] * scalar;
 }
 
-void vec_cross(double result[3], double a[3], double b[3])
+
+double	vec_dot(double a[3], double b[3])
 {
-    result[0] = a[1] * b[2] - a[2] * b[1];
-    result[1] = a[2] * b[0] - a[0] * b[2];
-    result[2] = a[0] * b[1] - a[1] * b[0];
+	return (a[0] * b[0] + 
+			a[1] * b[1] + 
+			a[2] * b[2]);
 }
 
+void	vec_cross(double result[3], double a[3], double b[3])
+{
+	result[0] = a[1] * b[2] - a[2] * b[1];
+	result[1] = a[2] * b[0] - a[0] * b[2];
+	result[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+void	vec_project(double *result, double *a, double *b)
+{
+	double	dot_ab;
+	double	dot_bb;
+	double	scalar;
+
+	// Calculate the dot product of v and axis
+	dot_ab = vec_dot(a, b);
+	// Assume axis is normalized; otherwise, normalize it or divide by its length squared.
+	dot_bb = vec_dot(b, b);
+	scalar = dot_ab / dot_bb;
+	// Scale the axis vector by the projection scalar
+	vec_scale(result, b, scalar);
+}
+
+void	ray_at_t(double result[3], t_ray ray, double t)
+{
+	vec_scale(result, ray.direction, t);
+	vec_add(result, ray.origin, result);
+}
