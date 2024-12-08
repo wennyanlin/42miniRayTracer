@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/05 13:15:21 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/08 15:52:10 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	render(t_data *data)
 				hit_flag = intersect_sphere(ray, *(data->obj), &t);
 			else if (data->obj->id == CYLINDER)
 				hit_flag = hit_cylinder(ray, *(data->obj), &t);
+			apply_light();
 			if (hit_flag)
 				my_mlx_pixel_put(data->img, x, y, ray_color(ray, *(data->obj), t));
 			y++;
