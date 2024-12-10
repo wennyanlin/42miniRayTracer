@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/05 16:39:14 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/10 17:16:03 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ bool intersect_sphere(t_ray ray, t_obj sphere, double *t)
 	double	b;
 	double	c;
 	double	discriminant;
+	double	root1;
+	double	hit_point[3];
+	double	normal_hit_point[3];
 
 	vec_sub(oc, ray.origin, sphere.xyz);
 	a = vec_dot(ray.direction, ray.direction);
@@ -27,10 +30,17 @@ bool intersect_sphere(t_ray ray, t_obj sphere, double *t)
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (false);
-	else
+	root1 = (-b - sqrt(discriminant)) / 2;
+	if (root1 <= 0.001 || 2147483647 <= root1)
 	{
-		*t = (-b - sqrt(discriminant)) / (2 * a);
-		return (true);
+		 root1 = (-b + sqrt(discriminant)) / 2;
+		 if (root1 <= 0.001 || 2147483647 <= root1)
+		 	return (false);
 	}
+	*t = root1;
+	ray_at_t(hit_point, ray, root1);
+	vec_sub(normal_hit_point, hit_point, sphere.xyz);
+	vec_div(normal_hit_point, (sphere.diam)/2);
+	return (true);
 }
 

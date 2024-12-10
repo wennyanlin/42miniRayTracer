@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:15:36 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/05 16:41:27 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/10 17:12:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	vec_cross(double result[3], double a[3], double b[3]);
 void	vec_copy(double vec_dest[3], double vec_src[3]);
 void	vec_project(double *result, double *v, double *axis);
 double	vec_length(double vec[3]);
+void	vec_div(double vec[3], double scalar);
 
 #endif

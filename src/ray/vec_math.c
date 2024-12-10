@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:29:23 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/05 16:35:10 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/10 17:10:23 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ void	vec_cross(double result[3], double a[3], double b[3])
 	result[0] = a[1] * b[2] - a[2] * b[1];
 	result[1] = a[2] * b[0] - a[0] * b[2];
 	result[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+void	vec_div(double vec[3], double scalar)
+{
+	vec[0] /= scalar;
+	vec[1] /= scalar;
+	vec[2] /= scalar;
 }
 
 void	vec_project(double *result, double *a, double *b)
