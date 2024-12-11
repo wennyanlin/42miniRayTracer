@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/26 00:59:44 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/11 23:55:28 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ bool	find_hit_t(t_hit *hit, double *t)
 	hit->t0 = (-hit->b - sqrt(hit->discriminant)) / (2.0 * hit->a);
 	hit->t1 = (-hit->b + sqrt(hit->discriminant)) / (2.0 * hit->a);
 	// Get the closest valid t(hit distance)
-	if (hit->t0 > 0)
+	if (hit->t0 > 0.001 && hit->t0 < *t)
 		*t = hit->t0;
-	else if (hit->t1 > 0)
+	else if (hit->t1 > 0.001 && hit->t1 < *t)
 		*t = hit->t1;
 	else
 		return (false);
