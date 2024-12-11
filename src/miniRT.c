@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/05 13:15:21 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/11 16:18:56 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	render(t_data *data)
 		y = 0;
 		while (y < HEIGHT)
 		{
+			t = 2147483647;
 			ray = generate_ray(*(data->cam), data->view_params, x, y);
 			if (data->obj->id == PLANE)
 				hit_flag = hit_plane(ray, *(data->obj), &t);

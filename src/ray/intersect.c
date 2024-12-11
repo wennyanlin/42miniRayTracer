@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/10 17:16:03 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/11 15:43:13 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ bool intersect_sphere(t_ray ray, t_obj sphere, double *t)
 	if (discriminant < 0)
 		return (false);
 	root1 = (-b - sqrt(discriminant)) / 2;
-	if (root1 <= 0.001 || 2147483647 <= root1)
+	if (root1 < 0.001 || *t < root1)
 	{
 		 root1 = (-b + sqrt(discriminant)) / 2;
-		 if (root1 <= 0.001 || 2147483647 <= root1)
+		 if (root1 <= 0.001 || *t <= root1)
 		 	return (false);
 	}
 	*t = root1;
