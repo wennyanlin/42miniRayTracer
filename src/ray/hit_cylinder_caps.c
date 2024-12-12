@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/04 13:44:22 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/12 10:04:09 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int hit_cylinder_cap(t_ray ray, t_obj cy, double *t)
 		return (0);
 	vec_sub(to_cap, cy.xyz, ray.origin);
 	*t = vec_dot(to_cap, cy.vc) / alignment;
-	if (*t < 0) // Intersection is behind the ray origin
+	if (*t < 0.001) // Intersection is behind the ray origin
 		return (0);
 	// Compute the intersection point
 	vec_scale(p, ray.direction, *t);
@@ -42,16 +42,14 @@ int check_caps_hit(t_ray ray, t_obj cy, double *t, int *hit_flag)
 	double cap_center[3];
 	double cap_t;
 
-	// Bottom cap
 	if (hit_cylinder_cap(ray, cy, &cap_t))
 	{
-		if (!*hit_flag || cap_t < *t)
+		if (cap_t > 0.001 || cap_t < *t)
 		{
 			*t = cap_t;
 			*hit_flag = 1;
 		}
 	}
-	// Top cap
 	vec_scale(cap_center, cy.vc, cy.height);
 	vec_add(cap_center, cap_center, cy.xyz);
 	if (hit_cylinder_cap(ray, cy, &cap_t))

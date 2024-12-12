@@ -6,12 +6,13 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/11 23:55:28 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/12 09:30:14 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+//Computes the perpendicular components of ray.direction and the vector oc relative to the cylinder’s axis.
 void	compute_perp(t_ray ray, t_obj cy, double dir_perp[3], double oc_perp[3])
 {
 	double	oc[3];
