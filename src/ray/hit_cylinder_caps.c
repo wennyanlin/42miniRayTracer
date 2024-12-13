@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/12 10:04:09 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/13 14:18:40 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int check_caps_hit(t_ray ray, t_obj cy, double *t, int *hit_flag)
 
 	if (hit_cylinder_cap(ray, cy, &cap_t))
 	{
-		if (cap_t > 0.001 || cap_t < *t)
+		if (cap_t > 0.001 && cap_t < *t)
 		{
 			*t = cap_t;
 			*hit_flag = 1;
@@ -54,7 +54,7 @@ int check_caps_hit(t_ray ray, t_obj cy, double *t, int *hit_flag)
 	vec_add(cap_center, cap_center, cy.xyz);
 	if (hit_cylinder_cap(ray, cy, &cap_t))
 	{
-		if (!*hit_flag || cap_t < *t)
+		if (!*hit_flag && cap_t < *t)
 		{
 			*t = cap_t;
 			*hit_flag = 1;
