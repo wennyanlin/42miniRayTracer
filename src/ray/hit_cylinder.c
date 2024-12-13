@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/12 09:30:14 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/13 17:50:20 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	check_body_hit(t_ray ray, t_obj cy, double *t)
 	vec_scale(hit_point, ray.direction, *t);
 	vec_add(hit_point, hit_point, ray.origin);
 	vec_sub(sub_result, hit_point, cy.xyz);
-	projection = vec_dot(sub_result, cy.vc);
+	projection = fabs(vec_dot(sub_result, cy.vc));
 	if (projection >= 0 && projection <= cy.height)
 		return (true);
 	else
