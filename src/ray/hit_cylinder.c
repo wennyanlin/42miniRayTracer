@@ -6,72 +6,68 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/13 17:50:20 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/16 02:56:14 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-//Computes the perpendicular components of ray.direction and the vector oc relative to the cylinder’s axis.
-void	compute_perp(t_ray ray, t_obj cy, double dir_perp[3], double oc_perp[3])
-{
-	double	oc[3];
-	
-	vec_sub(oc, ray.origin, cy.xyz);//3D vector: ray_origin onto cylinder_center
-	vec_project(dir_perp, ray.direction, cy.vc);//parallel component: ray_direction => cylinder_axis
-	vec_sub(dir_perp, ray.direction, dir_perp);// perpendicular component from ray_direction
-	vec_project(oc_perp, oc, cy.vc);// Project the oc vector (ray's origin to cylinder's base) onto the cylinder's axis
-	vec_sub(oc_perp, oc, oc_perp);// Subtract the parallel component of oc from oc to get the perpendicular component
-}
-
-bool	find_hit_t(t_hit *hit, double *t)
-{
-	hit->discriminant = hit->b * hit->b - 4 * hit->a * hit->c;
-	hit->t0 = (-hit->b - sqrt(hit->discriminant)) / (2.0 * hit->a);
-	hit->t1 = (-hit->b + sqrt(hit->discriminant)) / (2.0 * hit->a);
-	// Get the closest valid t(hit distance)
-	if (hit->t0 > 0.001 && hit->t0 < *t)
-		*t = hit->t0;
-	else if (hit->t1 > 0.001 && hit->t1 < *t)
-		*t = hit->t1;
-	else
-		return (false);
-	return (true);
-}
-
-bool	check_body_hit(t_ray ray, t_obj cy, double *t)
+bool	check_body_hit(t_ray ray, t_obj cy, t_quad *quad, t_hit_rec *rec)
 {
 	double	projection;
 	double	sub_result[3];
 	double	hit_point[3];
-	
-	vec_scale(hit_point, ray.direction, *t);
-	vec_add(hit_point, hit_point, ray.origin);
-	vec_sub(sub_result, hit_point, cy.xyz);
-	projection = fabs(vec_dot(sub_result, cy.vc));
-	if (projection >= 0 && projection <= cy.height)
-		return (true);
+	double	axis[3];
+	double	tmp[3];
+	double	base_to_hit[3];
+
+	quad->t1 = (-quad->b - sqrt(quad->discriminant)) / (2 * quad->a);
+	quad->t2 = (-quad->b + sqrt(quad->discriminant)) / (2 * quad->a);
+	if (quad->t1 > 0.000001 && quad->t1 < rec->t)
+		rec->t = quad->t1;
+	else if (quad->t2 > 0.000001 && quad->t2 < rec->t)
+		rec->t = quad->t2;
 	else
 		return (false);
+	vec_scale(hit_point, ray.direction, rec->t);
+	vec_add(hit_point, hit_point, ray.origin);
+	vec_copy(axis, cy.vc);
+	vec_normalize(axis);
+	vec_sub(sub_result, hit_point, cy.xyz);
+	projection = vec_dot(sub_result, axis);
+	if (projection < 0 || projection > cy.height)
+		return (false);
+	vec_copy(rec->p, hit_point);
+	vec_scale(tmp, axis, projection);
+	vec_sub(base_to_hit, sub_result, tmp);
+	vec_normalize(base_to_hit);
+	vec_copy(rec->normal, base_to_hit);
+	return (true);
 }
 
-bool	hit_cylinder(t_ray ray, t_obj cy, double *t)
+bool hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 {
-	t_hit	hit;
-	double	d_perp[3];
+	t_quad	quad;
+	double	oc[3];
 	double	oc_perp[3];
-	
-	hit.hit_flag = 0;
-	compute_perp(ray, cy, d_perp, oc_perp);
-	hit.a = vec_dot(d_perp, d_perp);
-	hit.b = 2 * vec_dot(d_perp, oc_perp);
-	hit.c = vec_dot(oc_perp, oc_perp) - ((cy.diam / 2) * (cy.diam / 2));
-	hit.discriminant = hit.b * hit.b - 4 * hit.a * hit.c;
-	if (hit.discriminant < 0 || !find_hit_t(&hit, t))
+	double	dir_perp[3];
+	double	axis[3];
+
+	quad.hit_flag = 0;
+	vec_sub(oc, ray.origin, cy.xyz);
+	vec_copy(axis, cy.vc);
+	vec_normalize(axis);
+	vec_cross(dir_perp, ray.direction, axis);
+	vec_cross(oc_perp, oc, axis);
+	quad.a = vec_dot(dir_perp, dir_perp);
+	quad.b = 2 * vec_dot(dir_perp, oc_perp);
+	quad.c = vec_dot(oc_perp, oc_perp) - ((cy.diam / 2) * (cy.diam / 2));
+	quad.discriminant = quad.b * quad.b - 4 * quad.a * quad.c;
+	if (quad.discriminant < 0)
 		return (false);
-	if (check_body_hit(ray, cy, t))
-		hit.hit_flag = 1;
-	if (check_caps_hit(ray, cy, t, &(hit.hit_flag)))
-		hit.hit_flag = 1;
-	return (hit.hit_flag);
+	if (check_body_hit(ray, cy, &quad, rec))
+		quad.hit_flag = 1;
+	if (check_caps_hit(ray, cy, &(quad.hit_flag), rec))
+		quad.hit_flag = 1;
+	return (quad.hit_flag);
 }

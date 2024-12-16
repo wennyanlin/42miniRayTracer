@@ -6,41 +6,34 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/11 15:43:13 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/16 12:50:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-bool intersect_sphere(t_ray ray, t_obj sphere, double *t)
+bool intersect_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec)
 {
+	t_quad	hit;
 	double	oc[3];
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	root1;
-	double	hit_point[3];
-	double	normal_hit_point[3];
 
 	vec_sub(oc, ray.origin, sphere.xyz);
-	a = vec_dot(ray.direction, ray.direction);
-	b = 2 * vec_dot(oc, ray.direction);
-	c = vec_dot(oc, oc) - (sphere.diam/2) * (sphere.diam/2);
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	hit.a = vec_dot(ray.direction, ray.direction);
+	hit.b = 2 * vec_dot(oc, ray.direction);
+	hit.c = vec_dot(oc, oc) - (sphere.diam / 2) * (sphere.diam / 2);
+	hit.discriminant = hit.b * hit.b - 4 * hit.a * hit.c;
+	if (hit.discriminant < 0)
 		return (false);
-	root1 = (-b - sqrt(discriminant)) / 2;
-	if (root1 < 0.001 || *t < root1)
-	{
-		 root1 = (-b + sqrt(discriminant)) / 2;
-		 if (root1 <= 0.001 || *t <= root1)
-		 	return (false);
-	}
-	*t = root1;
-	ray_at_t(hit_point, ray, root1);
-	vec_sub(normal_hit_point, hit_point, sphere.xyz);
-	vec_div(normal_hit_point, (sphere.diam)/2);
+	hit.t1 = (-hit.b - sqrt(hit.discriminant)) / 2;
+	hit.t2 = (-hit.b + sqrt(hit.discriminant)) / 2;
+	if (hit.t1 >= 0.001 || hit.t1 <= rec->t)
+		rec->t = hit.t1;
+	else if (hit.t2 >= 0.001 || hit.t2 <= rec->t)
+		rec->t = hit.t2;
+	else
+		return (false);
+	ray_at_t(rec->p, ray, rec->t);
+	vec_sub(rec->normal, rec->p, sphere.xyz);
+	vec_div(rec->normal, (sphere.diam) / 2);
 	return (true);
 }
-

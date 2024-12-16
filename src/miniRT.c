@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/13 17:49:29 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/16 02:43:21 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-t_view    init_view_params(t_cam camera)
+t_view	init_view_params(t_cam camera)
 {
 	t_view	view_params;
-	double world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
+	double	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
 
 	view_params.aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	view_params.fov_scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
@@ -77,29 +77,29 @@ t_view    init_view_params(t_cam camera)
 
 void	render(t_data *data)
 {
-	int		x;
-	int		y;
-	t_ray	ray;
-	double	t;
-	int		hit_flag;
+	int			x;
+	int			y;
+	t_ray		ray;
+	int			hit_flag;
+	t_hit_rec	rec;
 
-	data->view_params = init_view_params(*(data->cam));
 	x = 0;
+	data->view_params = init_view_params(*(data->cam));
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGHT)
 		{
-			t = 2147483647;
+			rec.t = 2147483647;
 			ray = generate_ray(*(data->cam), data->view_params, x, y);
 			if (data->obj->id == PLANE)
-				hit_flag = hit_plane(ray, *(data->obj), &t);
+				hit_flag = hit_plane(ray, *(data->obj), &rec);
 			else if (data->obj->id == SPHERE)
-				hit_flag = intersect_sphere(ray, *(data->obj), &t);
+				hit_flag = intersect_sphere(ray, *(data->obj), &rec);
 			else if (data->obj->id == CYLINDER)
-				hit_flag = hit_cylinder(ray, *(data->obj), &t);
+				hit_flag = hit_cylinder(ray, *(data->obj), &rec);
 			if (hit_flag)
-				my_mlx_pixel_put(data->img, x, y, /*ray_color(ray, *(data->obj), t)*/0xff0000);
+				my_mlx_pixel_put(data->img, x, y, /*ray_color(ray, *(data->obj), t)*/ 0xff0000);
 			y++;
 		}
 		x++;
