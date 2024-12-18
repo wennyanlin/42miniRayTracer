@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 14:42:57 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/16 18:14:25 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/18 19:07:01 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ void	vec_copy(double vec_dest[3], double vec_src[3])
 	vec_dest[0] = vec_src[0];
 	vec_dest[1] = vec_src[1];
 	vec_dest[2] = vec_src[2];
-}
-
-int	color_converter(int color[3])
-{
-	return (color[0] << 16) | (color[1] << 8) | color[2];
 }
 
 int	normal_color(double normal[3])
