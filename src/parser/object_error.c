@@ -44,7 +44,7 @@ int	cylinder_error(char **elem)
 {
 	if (array_len(elem) != 6)
 		return (ft_putendl_fd(\
-	"Error: Plane needs 5 parameters: coordinates, vectors, diameter, height, \
+	"Error: Cylinder needs 5 parameters: coordinates, vectors, diameter, height, \
 color", 2), 1);
 	if (check_xyz(elem[1], elem[0], "coordinate"))
 		return (1);
