@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/16 18:19:18 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/18 14:16:11 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ bool	check_body_hit(t_ray ray, t_obj cy, t_quad *quad, t_hit_rec *rec)
 	double	axis[3];
 	double	tmp[3];
 	double	base_to_hit[3];
+	double	body_t;
 
 	quad->t1 = (-quad->b - sqrt(quad->discriminant)) / (2 * quad->a);
 	quad->t2 = (-quad->b + sqrt(quad->discriminant)) / (2 * quad->a);
 	if (quad->t1 > 0.000001 && quad->t1 < rec->t)
-		rec->t = quad->t1;
+		body_t = quad->t1;
 	else if (quad->t2 > 0.000001 && quad->t2 < rec->t)
-		rec->t = quad->t2;
+		body_t = quad->t2;
 	else
 		return (false);
-	vec_scale(hit_point, ray.direction, rec->t);
+	vec_scale(hit_point, ray.direction, body_t);
 	vec_add(hit_point, hit_point, ray.origin);
 	vec_copy(axis, cy.vc);
 	vec_normalize(axis);
@@ -37,6 +38,7 @@ bool	check_body_hit(t_ray ray, t_obj cy, t_quad *quad, t_hit_rec *rec)
 	projection = vec_dot(sub_result, axis);
 	if (projection < 0 || projection > cy.height)
 		return (false);
+	rec->t = body_t;
 	vec_copy(rec->p, hit_point);
 	vec_scale(tmp, axis, projection);
 	vec_sub(base_to_hit, sub_result, tmp);

@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:48 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:09:01 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	render(t_data *data)
 	t_ray		ray;
 	int			hit_flag;
 	t_hit_rec	rec;
+	t_obj		*obj;
 
 	x = 0;
 	data->view_params = init_view_params(*(data->cam));
@@ -91,18 +92,23 @@ void	render(t_data *data)
 		while (y < HEIGHT)
 		{
 			rec.t = 2147483647;
-			ray = generate_ray(*(data->cam), data->view_params, x, y);
-			if (data->obj->id == PLANE)
-				hit_flag = hit_plane(ray, *(data->obj), &rec);
-			else if (data->obj->id == SPHERE)
-				hit_flag = intersect_sphere(ray, *(data->obj), &rec);
-			else if (data->obj->id == CYLINDER)
-				hit_flag = hit_cylinder(ray, *(data->obj), &rec);
-			if (hit_flag)
+			obj = data->obj;
+			while (obj != NULL)
 			{
+				ray = generate_ray(*(data->cam), data->view_params, x, y);
+				if (obj->id == PLANE)
+					hit_flag = hit_plane(ray, *(obj), &rec);
+				else if (obj->id == SPHERE)
+					hit_flag = intersect_sphere(ray, *(obj), &rec);
+				else if (obj->id == CYLINDER)
+					hit_flag = hit_cylinder(ray, *(obj), &rec);
+				if (hit_flag)
+				{
 				lightning(&rec, data);
 				my_mlx_pixel_put(data->img, x, y,
-					color_converter(data->obj->rgb, rec.intensity));
+						color_converter(obj->rgb, rec.intensity));
+				}
+				obj = obj->next;
 			}
 			y++;
 		}
