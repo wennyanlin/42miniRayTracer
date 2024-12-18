@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objects.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 18:10:18 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/14 18:28:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:40:34 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_plane(char **elem, t_obj *node)
 	node->id = PLANE;
 	fill_coordinates(elem[1], node->xyz);
 	fill_coordinates(elem[2], node->vc);
+	vec_normalize(node->vc);
 	fill_rgb(elem[3], node->rgb);
 }
 
@@ -33,6 +34,7 @@ static void	init_cylinder(char **elem, t_obj *node)
 	node->id = CYLINDER;
 	fill_coordinates(elem[1], node->xyz);
 	fill_coordinates(elem[2], node->vc);
+	vec_normalize(node->vc);
 	node->diam = ft_atod(elem[3]);
 	node->height = ft_atod(elem[4]);
 	fill_rgb(elem[5], node->rgb);
