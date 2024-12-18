@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:15:36 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/16 02:41:16 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/16 18:15:25 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 t_ray	generate_ray(t_cam camera, t_view view_params, int x, int y);
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec);
 bool	hit_cylinder(t_ray ray, t_obj cylinder, t_hit_rec *rec);
-int		color_converter(double color[3]);
-int		ray_color(t_ray ray, t_obj obj, double t);
+int		color_converter(int color[3]);
+// int		ray_color(t_ray ray, t_obj obj, double t);
 void	ray_at_t(double result[3], t_ray ray, double t);
 int		check_caps_hit(t_ray ray, t_obj cy, int *hit_flag, t_hit_rec *rec);
 bool	hit_plane(t_ray ray, t_obj plane, t_hit_rec *rec);
+int		normal_color(double normal[3]);
 
 //Math Calculation
 void	vec_copy(double vec_dest[3], double vec_src[3]);

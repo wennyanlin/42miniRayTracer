@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/16 02:56:14 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/16 18:19:18 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ bool hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 	quad.discriminant = quad.b * quad.b - 4 * quad.a * quad.c;
 	if (quad.discriminant < 0)
 		return (false);
-	if (check_body_hit(ray, cy, &quad, rec))
-		quad.hit_flag = 1;
 	if (check_caps_hit(ray, cy, &(quad.hit_flag), rec))
+		quad.hit_flag = 1;
+	if (check_body_hit(ray, cy, &quad, rec))
 		quad.hit_flag = 1;
 	return (quad.hit_flag);
 }
