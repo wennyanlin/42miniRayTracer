@@ -12,13 +12,6 @@
 
 #include "miniRT.h"
 
-void	vec_copy(double vec_dest[3], double vec_src[3])
-{
-	vec_dest[0] = vec_src[0];
-	vec_dest[1] = vec_src[1];
-	vec_dest[2] = vec_src[2];
-}
-
 int	normal_color(double normal[3])
 {
 	int r = (int)(255.999 * ((normal[0] + 1) / 2));
