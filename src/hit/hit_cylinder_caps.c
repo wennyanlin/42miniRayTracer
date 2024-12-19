@@ -6,19 +6,19 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/16 18:21:05 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/19 17:30:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	hit_cylinder_cap(t_ray ray, t_cap *cap, t_hit_rec *rec)
+bool	hit_cylinder_cap(t_ray ray, t_cap *cap, t_hit_rec *rec)
 {
-	double	alignment;
-	double	oc[3];
-	double	hit_point_to_c[3];
-	double	hit_point[3];
-	double	cap_t;
+	float	alignment;
+	float	oc[3];
+	float	hit_point_to_c[3];
+	float	hit_point[3];
+	float	cap_t;
 
 	alignment = vec_dot(ray.direction, cap->normal);
 	if (fabs(alignment) < 0.000001)
@@ -37,7 +37,7 @@ int	hit_cylinder_cap(t_ray ray, t_cap *cap, t_hit_rec *rec)
 	return (true);
 }
 
-int	check_caps_hit(t_ray ray, t_obj cy, int *hit_flag, t_hit_rec *rec)
+bool	check_caps_hit(t_ray ray, t_obj cy, t_hit_rec *rec, bool *hit_flag)
 {
 	t_cap	cap;
 
@@ -51,6 +51,6 @@ int	check_caps_hit(t_ray ray, t_obj cy, int *hit_flag, t_hit_rec *rec)
 	vec_scale(cap.center, cap.normal, cy.height);
 	vec_add(cap.center, cap.center, cy.xyz);
 	if (hit_cylinder_cap(ray, &cap, rec))
-		*hit_flag = 1;
+		*hit_flag = true;
 	return (*hit_flag);
 }

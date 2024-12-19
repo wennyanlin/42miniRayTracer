@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lightning.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:54:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 19:06:31 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:30:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	color_converter(int color[3], double intensity)
+int	color_converter(int color[3], float intensity)
 {
 	int r = (int)(intensity * color[0]);
 	int g = (int)(intensity * color[1]);
@@ -20,9 +20,9 @@ int	color_converter(int color[3], double intensity)
 	return (r << 16) | (g << 8) | b;
 }
 
-double	lambert_law(double light_dir[3], double norm[3])
+float	lambert_law(float light_dir[3], float norm[3])
 {
-	double	intensity;
+	float	intensity;
 
 	intensity = vec_dot(light_dir, norm);
 	if (intensity < 0)
@@ -33,7 +33,7 @@ double	lambert_law(double light_dir[3], double norm[3])
 void	lightning(t_hit_rec *rec, t_data *data)
 {
 
-	double	light_dir[3];
+	float	light_dir[3];
 
 //	vec_sub(point->norm, point->xyz, data->obj->xyz);
 //	vec_normalize(point->norm);

@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 23:09:01 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/19 17:51:12 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 t_view	init_view_params(t_cam camera)
 {
 	t_view	view_params;
-	double	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
+	float	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
 
-	view_params.aspect_ratio = (double)WIDTH / (double)HEIGHT;
+	view_params.aspect_ratio = (float)WIDTH / (float)HEIGHT;
 	view_params.fov_scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
 	// Calculate Camera Basis Vectors (Right and Up)
 	vec_cross(view_params.cam_right, world_up, camera.vc); // Cross product to get cam_right
@@ -80,7 +80,7 @@ void	render(t_data *data)
 	int			x;
 	int			y;
 	t_ray		ray;
-	int			hit_flag;
+	bool		hit_flag;
 	t_hit_rec	rec;
 	t_obj		*obj;
 
@@ -99,14 +99,14 @@ void	render(t_data *data)
 				if (obj->id == PLANE)
 					hit_flag = hit_plane(ray, *(obj), &rec);
 				else if (obj->id == SPHERE)
-					hit_flag = intersect_sphere(ray, *(obj), &rec);
+					hit_flag = hit_sphere(ray, *(obj), &rec);
 				else if (obj->id == CYLINDER)
 					hit_flag = hit_cylinder(ray, *(obj), &rec);
 				if (hit_flag)
 				{
-				lightning(&rec, data);
-				my_mlx_pixel_put(data->img, x, y,
-						color_converter(obj->rgb, rec.intensity));
+					lightning(&rec, data);
+					my_mlx_pixel_put(data->img, x, y,
+							color_converter(obj->rgb, rec.intensity));
 				}
 				obj = obj->next;
 			}

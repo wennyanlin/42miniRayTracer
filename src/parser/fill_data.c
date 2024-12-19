@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_elements.c                                    :+:      :+:    :+:   */
+/*   fill_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:05:40 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/27 15:09:01 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:30:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_rgb(char *color, int *rgb)
 	free(rgb_array);
 }
 
-void	fill_coordinates(char *coordinates, double *xyz)
+void	fill_coordinates(char *coordinates, float *xyz)
 {
 	char	**xyz_array;
 	int		i;

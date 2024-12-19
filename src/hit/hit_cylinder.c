@@ -6,41 +6,28 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/18 19:56:52 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/19 17:31:12 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	update_normal(t_hit_rec *rec, double *base_to_hit_point, double axis[3], double projection)
+void	set_normal(t_hit_rec *rec, float *base_to_p, float axis[3], float proj)
 {
-	double	scaled_axis[3];
+	float	scaled_axis[3];
 		
-	vec_scale(scaled_axis, axis, projection);
-	vec_sub(rec->normal, base_to_hit_point, scaled_axis);
+	vec_scale(scaled_axis, axis, proj);
+	vec_sub(rec->normal, base_to_p, scaled_axis);
 	vec_normalize(rec->normal);
 }
 
-bool	solve_quadratic_t(t_quad quad, double last_closest_t, double *new_t)
+bool	check_body_hit(t_ray ray, t_obj cy, t_hit_rec *rec, t_quad *quad)
 {
-	quad.t1 = (-quad.b - sqrt(quad.discriminant)) / (2 * quad.a);
-	quad.t2 = (-quad.b + sqrt(quad.discriminant)) / (2 * quad.a);
-	if (quad.t1 > 0.000001 && quad.t1 < last_closest_t)
-		*new_t = quad.t1;
-	else if (quad.t2 > 0.000001 && quad.t2 < last_closest_t)
-		*new_t = quad.t2;
-	else
-		return (false);
-	return (true);
-}
-
-bool	check_body_hit(t_ray ray, t_obj cy, t_quad *quad, t_hit_rec *rec)
-{
-	double	projection_on_axis;
-	double	base_to_hit_point[3];
-	double	hit_point[3];
-	double	cy_axis[3];
-	double	hit_t;
+	float	projection_on_axis;
+	float	base_to_hit_point[3];
+	float	hit_point[3];
+	float	cy_axis[3];
+	float	hit_t;
 
 	if (!solve_quadratic_t(*quad, rec->t, &hit_t))
 		return (false);
@@ -53,19 +40,19 @@ bool	check_body_hit(t_ray ray, t_obj cy, t_quad *quad, t_hit_rec *rec)
 		return (false);
 	rec->t = hit_t;
 	vec_copy(rec->p, hit_point);
-	update_normal(rec, base_to_hit_point, cy_axis, projection_on_axis);
+	set_normal(rec, base_to_hit_point, cy_axis, projection_on_axis);
 	return (true);
 }
 
 bool hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 {
 	t_quad	quad;
-	double	oc[3];
-	double	oc_perp[3];
-	double	dir_perp[3];
-	double	axis[3];
+	float	oc[3];
+	float	oc_perp[3];
+	float	dir_perp[3];
+	float	axis[3];
 
-	quad.hit_flag = 0;
+	quad.hit_flag = false;
 	vec_sub(oc, ray.origin, cy.xyz);
 	vec_copy(axis, cy.vc);
 	vec_normalize(axis);
@@ -77,9 +64,9 @@ bool hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 	quad.discriminant = quad.b * quad.b - 4 * quad.a * quad.c;
 	if (quad.discriminant < 0)
 		return (false);
-	if (check_caps_hit(ray, cy, &(quad.hit_flag), rec))
-		quad.hit_flag = 1;
-	if (check_body_hit(ray, cy, &quad, rec))
-		quad.hit_flag = 1;
+	if (check_caps_hit(ray, cy, rec, &(quad.hit_flag)))
+		quad.hit_flag = true;
+	if (check_body_hit(ray, cy, rec, &quad))
+		quad.hit_flag = true;
 	return (quad.hit_flag);
 }

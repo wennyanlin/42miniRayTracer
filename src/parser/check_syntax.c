@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:18:34 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/09/28 15:57:14 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:30:35 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	double_syntax(char *arg)
+int	float_syntax(char *arg)
 {
 	int	i;
 	int	point;
