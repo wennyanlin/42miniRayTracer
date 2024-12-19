@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:15:36 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/18 19:07:17 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:32:24 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 t_ray	generate_ray(t_cam camera, t_view view_params, int x, int y);
 bool	intersect_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec);
 bool	hit_cylinder(t_ray ray, t_obj cylinder, t_hit_rec *rec);
+bool	solve_quadratic_t(t_quad quad, double last_closest_t, double *new_t);
 // int		ray_color(t_ray ray, t_obj obj, double t);
 void	ray_at_t(double result[3], t_ray ray, double t);
 int		check_caps_hit(t_ray ray, t_obj cy, int *hit_flag, t_hit_rec *rec);
