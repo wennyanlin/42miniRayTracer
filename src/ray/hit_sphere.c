@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-bool intersect_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec)
+bool hit_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec)
 {
 	t_quad	quad;
 	double	oc[3];
