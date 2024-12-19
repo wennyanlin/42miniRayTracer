@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 23:09:01 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/19 17:07:35 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	render(t_data *data)
 					hit_flag = hit_cylinder(ray, *(obj), &rec);
 				if (hit_flag)
 				{
-				lightning(&rec, data);
+				lightning(&rec, data, x, y);
 				my_mlx_pixel_put(data->img, x, y,
 						color_converter(obj->rgb, rec.intensity));
 				}
