@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:54:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/19 17:10:28 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:32:17 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,58 +33,57 @@ double	lambert_law(double light_dir[3], double norm[3])
 		intensity = 0;
 	return (intensity);
 }
-
-t_ray generate_ray_light(void *param, t_view view_params, int x, int y)
+bool	hit_light(t_data *data, double light_dir[3], t_hit_rec *rec)
 {
-	t_ray	ray;
-	double	view_right[3];
-	double	view_up[3];
-	double	normalized_x;
-	double	normalized_y;
+	t_ray		ray;
+	int			hit_flag;
+	t_obj		*obj;
+	t_hit_rec	*rec_sh;
+	double		scale[3];
+
+	rec_sh = rec;
+	//rec_sh->t = 2147483647;
+	obj = data->obj;
+//	vec_copy(ray.origin, rec_sh->p);
+	vec_scale(scale, rec_sh->normal, 0.001);
+	vec_add(ray.origin, rec_sh->p, scale); 
+	vec_copy(ray.direction, light_dir);
+
+//	double		light_distance; // if rec_sh->t > ligth_distance retur true
+//	double		tmp_vc[3];
+//	vec_sub(tmp_vc, data->light->xyz, rec_sh->p);
+//	light_distance = vec_length(tmp_vc);
 	
-	// Ray starts from camera
-	vec_copy(ray.origin, param->xyz);
-	normalized_x = screen_x_to_viewport(x,
-		view_params.aspect_ratio, view_params.fov_scale);
-	normalized_y = screen_y_to_viewport(y, view_params.fov_scale);
-	// Compute Ray Direction
-	vec_scale(view_right, view_params.cam_right, normalized_x);
-	vec_scale(view_up, view_params.cam_up, normalized_y);
-	vec_add(ray.direction, view_right, view_up);
-	vec_add(ray.direction, ray.direction, param->vc);
-	vec_normalize(ray.direction);
-	return (ray);
-}
 
-bool	hit_light(t_data *data)
-{
-	t_ray	ray;
-	int		hit_flag;
-
-	ray = generate_ray_light(data->light, data->view_param, x, y);
+	hit_flag = 0;
 	while (obj != NULL)
 	{
-		//ray = generate_ray(*(data->cam), data->view_params, x, y);
 		if (obj->id == PLANE)
-			hit_flag = hit_plane(ray, *(obj), &rec);
+			hit_flag = hit_plane(ray, *(obj), rec_sh);
 		else if (obj->id == SPHERE)
-			hit_flag = intersect_sphere(ray, *(obj), &rec);
+			hit_flag = intersect_sphere(ray, *(obj), rec_sh);
 		else if (obj->id == CYLINDER)
-			hit_flag = hit_cylinder(ray, *(obj), &rec);
-		if (hit_flag)
+			hit_flag = hit_cylinder(ray, *(obj), rec_sh);
+		if (hit_flag ) // && obj->id != rec_sh->id)
+		{
+		//	printf("%f\n", rec_sh->t);
 			return true;			
+		}
 		obj = obj->next;
 	}
+	//return hit_flag;
 	return false;
 }
 
-void	lightning(t_hit_rec *rec, t_data *data, int x, int y)
+void	lightning(t_hit_rec *rec, t_data *data)
 {
 	double	light_dir[3];
 
 	vec_sub(light_dir, data->light->xyz, rec->p);
 	vec_normalize(light_dir);
-	rec->intensity = lambert_law(light_dir, rec->normal) * data->light->ratio;
-	if (!hit_light(data, x, y))
-		rec->intensity = 0;
+	rec->intensity = lambert_law(light_dir, rec->normal) * data->light->ratio;		if (hit_light(data, light_dir, rec))
+	{
+		printf("%f\n", rec->t);
+	rec->intensity = 0;
+	}
 }
