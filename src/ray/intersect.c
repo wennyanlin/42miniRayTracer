@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/20 18:33:08 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/22 14:34:04 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ bool intersect_sphere(t_ray ray, t_obj sphere, t_hit_rec *rec)
 	double	oc[3];
 	double	hit_t;
 
-//	rec->id = sphere.id;
+	rec->id = sphere.id;
+	rec->curr_obj = sphere;
 	vec_sub(oc, ray.origin, sphere.xyz);
 	quad.a = vec_dot(ray.direction, ray.direction);
 	quad.b = 2 * vec_dot(oc, ray.direction);

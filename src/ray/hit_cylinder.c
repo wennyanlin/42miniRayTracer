@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/20 18:33:08 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/22 13:33:25 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ bool hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 	double	dir_perp[3];
 	double	axis[3];
 
-//	rec->id = cy.id;
+	rec->id = cy.id;
+	rec->curr_obj = cy;
 	quad.hit_flag = 0;
 	vec_sub(oc, ray.origin, cy.xyz);
 	vec_copy(axis, cy.vc);
