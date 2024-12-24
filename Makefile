@@ -28,7 +28,7 @@ PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error\
 UTILS_FILES	= print free_utils system_error
 RAY_FILES	= generate_ray vec_math intersect ray_utils hit_cylinder\
 			  hit_cylinder_caps hit_plane
-LIGHT_FILES	= lightning
+LIGHT_FILES	= lightning shadows
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))

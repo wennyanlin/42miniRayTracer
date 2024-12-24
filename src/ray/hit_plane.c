@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/22 13:32:58 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:33:42 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ bool hit_plane(t_ray ray, t_obj plane, t_hit_rec *rec)
 	double	plane_t;
 	double	aux;
 	
-	rec->id = plane.id;
-	rec->curr_obj = plane;
 	alignment = vec_dot(ray.direction, plane.vc);
 	if (fabs(alignment) < 1e-6)
 		return (false);
