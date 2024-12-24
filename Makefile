@@ -27,7 +27,7 @@ PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error\
 			  specific_data_error syntax_range_error check_syntax print_error\
 			  object_error
 UTILS_FILES	= print free_utils system_error
-RAY_FILES	= generate_ray  ray_utils 
+RAY_FILES	= render_scene generate_ray init_screen ray_utils 
 LIGHT_FILES	= lightning
 HIT_FILES	= hit_sphere hit_cylinder hit_cylinder_caps hit_plane\
 			  vec_math1 vec_math2

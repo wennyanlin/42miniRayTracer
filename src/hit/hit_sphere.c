@@ -6,13 +6,13 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/19 17:30:35 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/24 17:45:32 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-bool	solve_quadratic_t(t_quad quad, float last_closest_t, float *new_t)
+bool	solve_quadratic_t(t_quad quad, double last_closest_t, double *new_t)
 {
 	quad.t1 = (-quad.b - sqrt(quad.discriminant)) / (2 * quad.a);
 	quad.t2 = (-quad.b + sqrt(quad.discriminant)) / (2 * quad.a);
@@ -25,11 +25,11 @@ bool	solve_quadratic_t(t_quad quad, float last_closest_t, float *new_t)
 	return (true);
 }
 
-bool hit_sphere(t_ray ray, t_obj sp, t_hit_rec *rec)
+boo	hit_sphere(t_ray ray, t_obj sp, t_hit_rec *rec)
 {
 	t_quad	quad;
-	float	oc[3];
-	float	hit_t;
+	double	oc[3];
+	double	hit_t;
 
 	vec_sub(oc, ray.origin, sp.xyz);
 	quad.a = vec_dot(ray.direction, ray.direction);
