@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale-tron <ale-tron@student.42barcel>       +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:27:18 by ale-tron          #+#    #+#             */
-/*   Updated: 2024/09/12 16:35:48 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:37:57 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# include <stdlib.h>
-# define LIBFT_H
+
+#include <stdlib.h>
+#define LIBFT_H
 
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
@@ -50,5 +50,3 @@ void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 char			*get_next_line(int fd);
-
-#endif

@@ -20,24 +20,27 @@ PARSE_DIR	= parser/
 UTILS_DIR	= utils/
 RAY_DIR		= ray/
 LIGHT_DIR	= light/
+HIT_DIR		= hit/
 
 MAIN_FILES	= miniRT
 PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error\
 			  specific_data_error syntax_range_error check_syntax print_error\
 			  object_error
 UTILS_FILES	= print free_utils system_error
-RAY_FILES	= generate_ray vec_math intersect ray_utils hit_cylinder\
-			  hit_cylinder_caps hit_plane
+RAY_FILES	= render_scene generate_ray init_screen ray_utils 
 LIGHT_FILES	= lightning shadows
+HIT_FILES	= hit_sphere hit_cylinder hit_cylinder_caps hit_plane\
+			  vec_math1 vec_math2
 
 MAIN_SRCS	= $(MAIN_FILES)
 PARSE_SRCS	= $(addprefix $(PARSE_DIR), $(PARSE_FILES))
 UTILS_SRCS	= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 RAY_SRCS	= $(addprefix $(RAY_DIR), $(RAY_FILES))
 LIGHT_SRCS	= $(addprefix $(LIGHT_DIR), $(LIGHT_FILES))
+HIT_SRCS	= $(addprefix $(HIT_DIR), $(HIT_FILES))
 
 SRCS		:= $(MAIN_SRCS) $(PARSE_SRCS) $(UTILS_SRCS) $(RAY_SRCS) \
-			   $(LIGHT_SRCS)
+			   $(LIGHT_SRCS) $(HIT_SRCS)
 OBJS		:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRCS)))
 DEPS		:= $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRCS)))
 SRCS		:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRCS)))

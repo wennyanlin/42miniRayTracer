@@ -6,7 +6,7 @@
 /*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 15:19:29 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 15:26:34 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 13:48:15 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "miniRT.h"
@@ -60,7 +60,7 @@ bool	calc_shadows(t_data *data, t_hit_rec *rec)
 		tmp_rec.t = rec->light_distance;
 		if (obj->id == PLANE && hit_plane(ray, *obj, &tmp_rec))
 			hit_flag = closest_object(tmp_rec.t, min_distance);
-		else if (obj->id == SPHERE && intersect_sphere(ray, *obj, &tmp_rec))
+		else if (obj->id == SPHERE && hit_sphere(ray, *obj, &tmp_rec))
 			hit_flag = closest_object(tmp_rec.t, min_distance);
 		else if (obj->id == CYLINDER && hit_cylinder(ray, *obj, &tmp_rec))
 			hit_flag = closest_object(tmp_rec.t, min_distance);
