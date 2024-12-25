@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 17:48:31 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/11/16 20:02:53 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 20:55:54 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define PLANE		5
 # define CYLINDER	6
 
-# define WIDTH      1600
-# define HEIGHT     900
+# define WIDTH      1920
+# define HEIGHT     1080
 
 #endif

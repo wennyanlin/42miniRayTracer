@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:14:21 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/24 17:41:03 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 23:31:41 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ double	screen_y_to_viewport(int y, double fov_scale)
 
 t_view	init_view_params(t_cam camera)
 {
-	t_view	view_params;
-	double	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
+	static double	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
+	t_view				view_params;
 
+	if (fabs(camera.vc[1]) > 0.999)
+	{
+		world_up[0] = 1.0; // Adjust the "up" vector to avoid instability
+		world_up[1] = 0.0;
+	}
 	view_params.aspect_ratio = (double)WIDTH / (double)HEIGHT;
 	view_params.fov_scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
 	// Calculate Camera Basis Vectors (Right and Up)

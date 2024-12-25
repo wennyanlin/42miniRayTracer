@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cle-tron <cle-tron@student.42barcelon      +#+  +:+       +#+        */
+/*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:49:14 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/10/03 13:39:08 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 18:48:29 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	init_camera(char **elem, t_data *data)
 	data->cam->id = CAMERA;
 	fill_coordinates(elem[1], data->cam->xyz);
 	fill_coordinates(elem[2], data->cam->vc);
+	vec_normalize(data->cam->vc);
 	data->cam->fov = ft_atoi(elem[3]);
 }
 
