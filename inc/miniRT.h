@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:39 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 18:56:32 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:12:50 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "macros.h"
 # include "parser.h"
 # include "utils.h"
+# include "hit.h"
 # include "ray.h"
 # include "light.h"
 

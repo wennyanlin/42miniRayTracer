@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/18 18:46:37 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_quad
 	double	discriminant;
 	double	t1;
 	double	t2;
-	int		hit_flag;
+	bool	hit_flag;
 }	t_quad;
 
 typedef struct s_data

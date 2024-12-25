@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 20:14:21 by wlin              #+#    #+#             */
-/*   Updated: 2024/11/16 20:29:02 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/24 17:41:03 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,33 @@ double	screen_y_to_viewport(int y, double fov_scale)
 	return ((1.0 - 2.0 * (y + 0.5) / (double)HEIGHT) * fov_scale);
 }
 
-t_ray generate_ray(t_cam camera, t_view view_params, int x, int y)
+t_view	init_view_params(t_cam camera)
+{
+	t_view	view_params;
+	double	world_up[3] = {0.0, 1.0, 0.0}; // Global "up" vector
+
+	view_params.aspect_ratio = (double)WIDTH / (double)HEIGHT;
+	view_params.fov_scale = tan((camera.fov * 0.5) * (M_PI / 180.0));  // Convert FOV from degrees to radians and get the scale
+	// Calculate Camera Basis Vectors (Right and Up)
+	vec_cross(view_params.cam_right, world_up, camera.vc); // Cross product to get cam_right
+	vec_normalize(view_params.cam_right);
+	vec_cross(view_params.cam_up, camera.vc, view_params.cam_right); // Cross product to get cam_up
+	vec_normalize(view_params.cam_up);
+	return (view_params);
+}
+
+t_ray	generate_ray(t_cam camera, t_view view_params, int x, int y)
 {
 	t_ray	ray;
 	double	view_right[3];
 	double	view_up[3];
 	double	normalized_x;
 	double	normalized_y;
-	
+
 	// Ray starts from camera
 	vec_copy(ray.origin, camera.xyz);
 	normalized_x = screen_x_to_viewport(x,
-		view_params.aspect_ratio, view_params.fov_scale);
+			view_params.aspect_ratio, view_params.fov_scale);
 	normalized_y = screen_y_to_viewport(y, view_params.fov_scale);
 	// Compute Ray Direction
 	vec_scale(view_right, view_params.cam_right, normalized_x);
