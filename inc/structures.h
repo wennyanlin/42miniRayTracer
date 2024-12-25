@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 13:37:41 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_hit_rec
 	double	t;
 	double	normal[3];
 	double	intensity;
-	t_obj	obj;
+	double	light_distance;
 }	t_hit_rec;
 
 typedef struct t_img

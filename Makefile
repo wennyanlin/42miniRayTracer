@@ -1,7 +1,7 @@
 NAME		= miniRT
 
 CC			= gcc
-CFLAGS		= -Werror -Wall -Wextra -g -fsanitize=address
+CFLAGS		= -Werror -Wall -Wextra # -g -fsanitize=leak
 LIB_FLAG	= -L${LIBFT_DIR} -lft -L${MLX_DIR} -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 DEP_FLAG	= -MMD -MP
 INCLUDE		= -I${INC_DIR} -I${LIBFT_DIR}inc/ -I${MLX_DIR} -I/usr/include
@@ -28,7 +28,7 @@ PARSE_FILES	= init fill_data parser_utils init_objects check_errors id_error\
 			  object_error
 UTILS_FILES	= print free_utils system_error
 RAY_FILES	= render_scene generate_ray init_screen ray_utils 
-LIGHT_FILES	= lightning
+LIGHT_FILES	= lightning shadows
 HIT_FILES	= hit_sphere hit_cylinder hit_cylinder_caps hit_plane\
 			  vec_math1 vec_math2
 

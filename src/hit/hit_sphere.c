@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 22:14:15 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/24 17:45:32 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 13:48:39 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	solve_quadratic_t(t_quad quad, double last_closest_t, double *new_t)
 	return (true);
 }
 
-boo	hit_sphere(t_ray ray, t_obj sp, t_hit_rec *rec)
+bool	hit_sphere(t_ray ray, t_obj sp, t_hit_rec *rec)
 {
 	t_quad	quad;
 	double	oc[3];

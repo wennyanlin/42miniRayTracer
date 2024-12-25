@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 16:58:55 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/24 17:42:52 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 13:47:02 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	render_pixel(t_data *data, t_hit_rec *rec, int x, int y)
 		{
 			lightning(rec, data);
 			my_mlx_pixel_put(data->img, x, y,
-				color_converter(obj->rgb, rec->intensity));
+				color_converter(obj->rgb, rec->intensity, data->amb));
 		}
 		obj = obj->next;
 	}

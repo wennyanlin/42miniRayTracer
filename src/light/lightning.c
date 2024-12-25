@@ -6,18 +6,36 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:54:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 13:41:23 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	color_converter(int color[3], double intensity)
+int	calc_color(int obj_color, int amb_color, double intensity, double amb_ratio)
 {
-	int r = (int)(intensity * color[0]);
-	int g = (int)(intensity * color[1]);
-	int b = (int)(intensity * color[2]);
-	return (r << 16) | (g << 8) | b;
+	int	base;
+	int	ambient;
+	int	result;
+
+	base = (int)(obj_color * intensity * (1 - amb_ratio));
+	ambient = (int)(obj_color / 255 * amb_color * amb_ratio);
+	result = base + ambient;
+	if (result > 255)
+		result = 255;
+	return (result);
+}
+
+int	color_converter(int obj_rgb[3], double intensity, t_amb *amb)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = calc_color(obj_rgb[0], amb->rgb[0], intensity, amb->ratio);
+	g = calc_color(obj_rgb[1], amb->rgb[1], intensity, amb->ratio);
+	b = calc_color(obj_rgb[2], amb->rgb[2], intensity, amb->ratio);
+	return ((r << 16) | (g << 8) | b);
 }
 
 double	lambert_law(double light_dir[3], double norm[3])
@@ -32,17 +50,17 @@ double	lambert_law(double light_dir[3], double norm[3])
 
 void	lightning(t_hit_rec *rec, t_data *data)
 {
-
 	double	light_dir[3];
 
-//	vec_sub(point->norm, point->xyz, data->obj->xyz);
-//	vec_normalize(point->norm);
 	vec_sub(light_dir, data->light->xyz, rec->p);
 	vec_normalize(light_dir);
-	rec->intensity = lambert_law(light_dir, rec->normal) * data->light->ratio;
-
-
-//printf("x:%f, y:%f, z:%f\n", point->norm[0], point->norm[1], point->norm[0]);
-//printf("intensity: %f\n", point->intensity);
-
+	if (calc_shadows(data, rec))
+		rec->intensity = data->amb->ratio;
+	else
+	{
+		rec->intensity = lambert_law(light_dir, rec->normal) * \
+		data->light->ratio + data->amb->ratio;
+	}
+	if (rec->intensity > 1)
+		rec->intensity = 1;
 }

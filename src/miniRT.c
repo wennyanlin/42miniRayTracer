@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 17:29:45 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 13:57:14 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	if (!data)
 		system_error("malloc");
 	init(argv[1], data);
-	print_data(data);
 	init_mlx(data);
 	render_scene(data);
 	free_data(data);
