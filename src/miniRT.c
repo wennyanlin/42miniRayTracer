@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:50:32 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 15:53:51 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 12:56:03 by cle-tron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int	close_win(int keycode, t_data *data)
 	return (0);
 }
 
-int	close_win_x(int keycode, t_data *data)
+int	close_win_x(t_data *data)
 {
-	(void)data;
-	(void)keycode;
+	free_data(data);
 	exit(0);
 	return (0);
 }
