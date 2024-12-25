@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:31:56 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 23:54:31 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	skip_space_and_sign(char *str, int *sign)
 	return (i);
 }
 
-double	ft_atod(char *str)
+float	ft_atod(char *str)
 {
-	double	nb;
-	double	fract;
+	float	nb;
+	float	fract;
 	int		i;
 	int		sign;
-	double	power;
+	float	power;
 
 	nb = 0;
 	sign = 1;

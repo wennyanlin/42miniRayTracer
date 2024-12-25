@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/24 17:44:40 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/26 00:02:37 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 bool	hit_cylinder_cap(t_ray ray, t_cap *cap, t_hit_rec *rec)
 {
-	double	alignment;
-	double	oc[3];
-	double	hit_point_to_c[3];
-	double	hit_point[3];
-	double	cap_t;
+	float	alignment;
+	float	oc[3];
+	float	hit_point_to_c[3];
+	float	hit_point[3];
+	float	cap_t;
 
 	alignment = vec_dot(ray.direction, cap->normal);
 	if (fabs(alignment) < 0.000001)

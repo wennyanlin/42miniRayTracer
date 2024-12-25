@@ -6,15 +6,15 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:15:49 by wlin              #+#    #+#             */
-/*   Updated: 2024/12/25 13:38:50 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 23:55:16 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	set_normal(t_hit_rec *rec, double *base_to_p, double axis[3], double proj)
+void	set_normal(t_hit_rec *rec, float *base_to_p, float axis[3], float proj)
 {
-	double	scaled_axis[3];
+	float	scaled_axis[3];
 
 	vec_scale(scaled_axis, axis, proj);
 	vec_sub(rec->normal, base_to_p, scaled_axis);
@@ -23,11 +23,11 @@ void	set_normal(t_hit_rec *rec, double *base_to_p, double axis[3], double proj)
 
 bool	check_body_hit(t_ray ray, t_obj cy, t_hit_rec *rec, t_quad *quad)
 {
-	double	projection_on_axis;
-	double	base_to_hit_point[3];
-	double	hit_point[3];
-	double	cy_axis[3];
-	double	hit_t;
+	float	projection_on_axis;
+	float	base_to_hit_point[3];
+	float	hit_point[3];
+	float	cy_axis[3];
+	float	hit_t;
 
 	if (!solve_quadratic_t(*quad, rec->t, &hit_t))
 		return (false);
@@ -47,10 +47,10 @@ bool	check_body_hit(t_ray ray, t_obj cy, t_hit_rec *rec, t_quad *quad)
 bool	hit_cylinder(t_ray ray, t_obj cy, t_hit_rec *rec)
 {
 	t_quad	quad;
-	double	oc[3];
-	double	oc_perp[3];
-	double	dir_perp[3];
-	double	axis[3];
+	float	oc[3];
+	float	oc_perp[3];
+	float	dir_perp[3];
+	float	axis[3];
 
 	quad.hit_flag = false;
 	vec_sub(oc, ray.origin, cy.xyz);

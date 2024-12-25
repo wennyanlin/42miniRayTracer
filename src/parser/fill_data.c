@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 17:05:40 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/26 00:00:26 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	fill_rgb(char *color, int *rgb)
 	free(rgb_array);
 }
 
-void	fill_coordinates(char *coordinates, double *xyz)
+void	fill_coordinates(char *coordinates, float *xyz)
 {
 	char	**xyz_array;
 	int		i;

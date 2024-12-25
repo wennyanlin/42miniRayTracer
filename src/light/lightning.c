@@ -6,13 +6,13 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:54:12 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/25 13:41:23 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 23:59:00 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	calc_color(int obj_color, int amb_color, double intensity, double amb_ratio)
+int	calc_color(int obj_color, int amb_color, float intensity, float amb_ratio)
 {
 	int	base;
 	int	ambient;
@@ -26,7 +26,7 @@ int	calc_color(int obj_color, int amb_color, double intensity, double amb_ratio)
 	return (result);
 }
 
-int	color_converter(int obj_rgb[3], double intensity, t_amb *amb)
+int	color_converter(int obj_rgb[3], float intensity, t_amb *amb)
 {
 	int	r;
 	int	g;
@@ -38,9 +38,9 @@ int	color_converter(int obj_rgb[3], double intensity, t_amb *amb)
 	return ((r << 16) | (g << 8) | b);
 }
 
-double	lambert_law(double light_dir[3], double norm[3])
+float	lambert_law(float light_dir[3], float norm[3])
 {
-	double	intensity;
+	float	intensity;
 
 	intensity = vec_dot(light_dir, norm);
 	if (intensity < 0)
@@ -50,7 +50,7 @@ double	lambert_law(double light_dir[3], double norm[3])
 
 void	lightning(t_hit_rec *rec, t_data *data)
 {
-	double	light_dir[3];
+	float	light_dir[3];
 
 	vec_sub(light_dir, data->light->xyz, rec->p);
 	vec_normalize(light_dir);

@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 15:51:08 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/25 23:42:37 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_syntax_error(char *arg, char *type, char *data, char *id);
 void	print_positive_error(char *arg, char *type, char *id);
 
 //CHECK_SYNTAX
-int		double_syntax(char *arg);
+int		float_syntax(char *arg);
 int		int_syntax(char *arg);
 
 //INIT
@@ -48,7 +48,7 @@ void	init(char *file, t_data *data);
 
 //FILL_DATA
 void	fill_rgb(char *color, int *rgb);
-void	fill_coordinates(char *coordinates, double *xyz);
+void	fill_coordinates(char *coordinates, float *xyz);
 
 //INIT_OBJECTS
 void	init_objects(char **elem, t_obj **obj, t_data *data);

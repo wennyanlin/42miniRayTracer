@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 14:03:21 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/25 13:37:41 by cle-tron         ###   ########.fr       */
+/*   Updated: 2024/12/25 23:53:41 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,57 +15,57 @@
 
 typedef struct s_ray
 {
-	double	origin[3];
-	double	direction[3];
+	float	origin[3];
+	float	direction[3];
 }	t_ray;
 
 typedef struct s_amb
 {
 	int		id;
-	double	ratio;
+	float	ratio;
 	int		rgb[3];
 }	t_amb;
 
 typedef struct s_cam
 {
 	int		id;
-	double	xyz[3];
-	double	vc[3];
+	float	xyz[3];
+	float	vc[3];
 	int		fov;
 }	t_cam;
 
 typedef struct s_light
 {
 	int		id;
-	double	xyz[3];
-	double	ratio;
+	float	xyz[3];
+	float	ratio;
 }	t_light;
 
 typedef struct s_obj
 {
 	int				id;
-	double			xyz[3];
-	double			vc[3];
-	double			diam;
-	double			height;
+	float			xyz[3];
+	float			vc[3];
+	float			diam;
+	float			height;
 	int				rgb[3];
 	struct s_obj	*next;
 }	t_obj;
 
 typedef struct s_cap
 {
-	double	normal[3];
-	double	center[3];
-	double	radius;
+	float	normal[3];
+	float	center[3];
+	float	radius;
 }	t_cap;
 
 typedef struct s_hit_rec
 {
-	double	p[3];
-	double	t;
-	double	normal[3];
-	double	intensity;
-	double	light_distance;
+	float	p[3];
+	float	t;
+	float	normal[3];
+	float	intensity;
+	float	light_distance;
 }	t_hit_rec;
 
 typedef struct t_img
@@ -79,20 +79,20 @@ typedef struct t_img
 
 typedef struct s_view
 {
-	double	aspect_ratio;
-	double	fov_scale;
-	double	cam_right[3];
-	double	cam_up[3];
+	float	aspect_ratio;
+	float	fov_scale;
+	float	cam_right[3];
+	float	cam_up[3];
 }	t_view;
 
 typedef struct s_quad
 {
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	t1;
-	double	t2;
+	float	a;
+	float	b;
+	float	c;
+	float	discriminant;
+	float	t1;
+	float	t2;
 	bool	hit_flag;
 }	t_quad;
 

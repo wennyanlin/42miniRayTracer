@@ -6,13 +6,13 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:18:34 by cle-tron          #+#    #+#             */
-/*   Updated: 2024/12/24 16:40:17 by wlin             ###   ########.fr       */
+/*   Updated: 2024/12/26 00:00:02 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	double_syntax(char *arg)
+int	float_syntax(char *arg)
 {
 	int	i;
 	int	point;
